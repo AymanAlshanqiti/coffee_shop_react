@@ -7,7 +7,7 @@ import * as actionCreators from "../store/actions";
 class Home extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <button onClick={this.props.hi}>Click Me!</button>
         <lable>{this.props.msg}</lable>
       </div>
