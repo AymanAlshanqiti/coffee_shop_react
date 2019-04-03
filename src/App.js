@@ -7,7 +7,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 class App extends Component {
   render() {
-    return <Home className="App" />;
+    return <Home />;
   }
 }
 
