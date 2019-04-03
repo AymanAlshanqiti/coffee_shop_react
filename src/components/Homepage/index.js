@@ -5,12 +5,27 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
 
 // Components
+import Navbar from "../navbar";
+import ProductsList from "../products";
+import productsData from "../products/productsData";
+import productDetail from "../products/productDetail";
+
 class Home extends Component {
   render() {
+    console.log("productsData", productsData);
+    const productsList = productsData.map(product => {
+      return <ProductsList product={product} key={product.id} />;
+    });
     return (
-      <div className="container-fluid my-4">
-        <button onClick={this.props.hi}>Click Me!</button>
-        <lable>{this.props.msg}</lable>
+      <div className="">
+        <Navbar />
+        <div className="container-fluid my-4">
+          <div className="row justify-content-md-center ">
+            <div className="col-8">
+              <div className="row">{productsList}</div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

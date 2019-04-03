@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class ProductsList extends Component {
+class productDetail extends Component {
   render() {
     return (
       <div className="col-3">
@@ -11,8 +11,8 @@ class ProductsList extends Component {
             alt="..."
           />
           <div className="card-body">
-            <h5 className="card-title">{this.props.product.name}</h5>
-            <p className="card-text">{this.props.product.price} S.R.</p>
+            <h5 className="card-title">lll</h5>
+            <p className="card-text"> S.R.</p>
             <a href="#" class="btn btn-light btn-block">
               More Info
             </a>
@@ -23,4 +23,4 @@ class ProductsList extends Component {
   }
 }
 
-export default ProductsList;
+export default productDetail;
