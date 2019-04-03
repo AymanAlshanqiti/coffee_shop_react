@@ -12,8 +12,9 @@ import { connect } from "react-redux";
 
 // Components
 import ProductList from "./components/ProductList";
-import productDetail from "./components/ProductDetail";
+import ProductDetail from "./components/ProductDetail";
 import Navbar from "../src/components/navbar";
+import Profile from "../src/components/profiles";
 
 class App extends Component {
   componentDidMount = async () => {
@@ -23,13 +24,14 @@ class App extends Component {
   render() {
     return (
       <div>
+        {/* <Profile /> */}
         <div>
           <Navbar />
         </div>
         <div className="container-fluid my-4">
           <Switch>
             <Route exact path="/products" component={ProductList} />
-            <Route path="/products/:productID" component={productDetail} />
+            <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />
           </Switch>
         </div>

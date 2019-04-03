@@ -23,6 +23,7 @@ class ProductsCards extends Component {
             <Link
               to={`/products/${product.id}`}
               class="btn btn-light btn-block"
+              style={{ backgroundColor: "#fe687b", color: "#fff" }}
             >
               Detail
             </Link>

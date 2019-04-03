@@ -56,6 +56,7 @@ class ProductDetail extends Component {
                       type="submit"
                       value="Add To Cart"
                       class="btn btn-light btn-block"
+                      style={{ backgroundColor: "#fe687b", color: "#fff" }}
                     />{" "}
                     <br />
                   </form>
