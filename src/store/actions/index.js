@@ -1,3 +1,7 @@
 export { hi } from "./ordersActions";
-// export {  } from "./productsActions";
+export {
+  getAllProducts,
+  getProductDetail,
+  setLoading
+} from "./productsActions";
 // export {  } from "./profileActions";
