@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
 
 // Components
-
 class Home extends Component {
   render() {
     return (
