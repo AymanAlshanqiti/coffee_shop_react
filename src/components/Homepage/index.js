@@ -7,25 +7,16 @@ import * as actionCreators from "../../store/actions";
 // Components
 class Home extends Component {
   render() {
-    return (
-      <div className="container-fluid my-4">
-        <button onClick={this.props.hi}>Click Me!</button>
-        <lable>{this.props.msg}</lable>
-      </div>
-    );
+    return <div className="container-fluid my-4" />;
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    msg: state.ordersReducer.msg
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    hi: () => dispatch(actionCreators.hi())
-  };
+  return {};
 };
 
 export default connect(
