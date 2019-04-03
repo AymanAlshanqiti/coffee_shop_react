@@ -17,7 +17,6 @@ import Navbar from "../src/components/navbar";
 
 class App extends Component {
   componentDidMount = async () => {
-    console.log("TEST");
     await this.props.getAllProducts();
   };
 
