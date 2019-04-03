@@ -5,30 +5,24 @@ import Loading from "../Loading";
 
 import { connect } from "react-redux";
 
-// import * as actionCreators from "../store/actions/index";
+import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
   componentDidMount() {
-    this.props.getProduct(this.props.match.params.authorID);
+    this.props.getProduct(this.props.match.params.productID);
   }
 
   render() {
-    if (this.props.loading) {
+    const { loading, productInfo } = this.props;
+
+    if (loading) {
       return <Loading />;
     } else {
-      const author = this.props.author;
       return (
-        <div className="author">
+        <div className="product">
           <div>
-            <h3>{author.first_name + " " + author.last_name}</h3>
-            <img
-              src={author.imageUrl}
-              className="img-thumbnail img-fluid"
-              alt={author.first_name + " " + author.last_name}
-            />
+            <h3>{productInfo.name}</h3>
           </div>
-          <BookTable books={author.books} />
-          {this.props.user ? <AddBookModal authorID={author.id} /> : <div />}
         </div>
       );
     }

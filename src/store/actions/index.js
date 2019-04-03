@@ -1,4 +1,4 @@
-export { hi } from "./ordersActions";
+export {} from "./ordersActions";
 export {
   getAllProducts,
   getProductDetail,

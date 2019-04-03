@@ -6,12 +6,6 @@ const initialState = {
 
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionsTypes.HI:
-      alert(state.msg);
-      return {
-        ...state,
-        msg: "Hi from  OrderReducer in redux"
-      };
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import * as actionTypes from "./types";
 
 import axios from "axios";
+import { setErrors } from "./errorsActions";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
@@ -16,7 +17,9 @@ export const getAllProducts = () => {
         type: actionTypes.GET_ALL_PRODUCTS,
         payload: products
       });
+      // dispatch(setErrors(null));
     } catch (error) {
+      dispatch(setErrors(error));
       console.error(error);
     }
   };
@@ -33,7 +36,10 @@ export const getProductDetail = prodID => {
         type: actionTypes.GET_PRODUCT_DETAIL,
         payload: productInfo
       });
+
+      // dispatch(setErrors(null));
     } catch (error) {
+      dispatch(setErrors(error));
       console.error(error);
     }
   };
