@@ -12,6 +12,7 @@ import productDetail from "../products/productDetail";
 
 class Home extends Component {
   render() {
+<<<<<<< HEAD
     console.log("productsData", productsData);
     const productsList = productsData.map(product => {
       return <ProductsList product={product} key={product.id} />;
@@ -28,19 +29,18 @@ class Home extends Component {
         </div>
       </div>
     );
+=======
+    return <div className="container-fluid my-4" />;
+>>>>>>> master
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    msg: state.ordersReducer.msg
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    hi: () => dispatch(actionCreators.hi())
-  };
+  return {};
 };
 
 export default connect(
