@@ -5,8 +5,13 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 class Loading extends Component {
   render() {
     return (
-      <div className="spinner mx-auto text-center">
-        <FontAwesomeIcon icon={faSpinner} spin size="4x" />
+      <div className="spinner mx-auto text-center my-5">
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          size="4x"
+          style={{ color: "#c7c7c7" }}
+        />
       </div>
     );
   }

@@ -11,24 +11,30 @@ import * as actionCreators from "./store/actions";
 import { connect } from "react-redux";
 
 // Components
-import Homepage from "./components/Homepage";
 import ProductList from "./components/ProductList";
-import ProductDetail from "./components/ProductDetail";
+import productDetail from "./components/ProductDetail";
+import Navbar from "../src/components/navbar";
 
 class App extends Component {
-  componentDidMount = () => {
+  componentDidMount = async () => {
     console.log("TEST");
-    this.props.getAllProducts();
+    await this.props.getAllProducts();
   };
 
   render() {
     return (
-      <Switch>
-        <Route path="/" component={Homepage} />
-        <Route path="/products" component={ProductList} />
-        <Route path="/products/:productID" component={ProductDetail} />
-        <Redirect to="/products" />
-      </Switch>
+      <div>
+        <div>
+          <Navbar />
+        </div>
+        <div className="container-fluid my-4">
+          <Switch>
+            <Route exact path="/products" component={ProductList} />
+            <Route path="/products/:productID" component={productDetail} />
+            <Redirect to="/products" />
+          </Switch>
+        </div>
+      </div>
     );
   }
 }

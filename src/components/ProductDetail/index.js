@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import Loading from "../Loading";
 
 import { connect } from "react-redux";
-
 import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
@@ -19,9 +18,20 @@ class ProductDetail extends Component {
       return <Loading />;
     } else {
       return (
-        <div className="product">
-          <div>
-            <h3>{productInfo.name}</h3>
+        <div className="col-4">
+          <div class="card my-4 align-items-center">
+            <img
+              src={productInfo.image}
+              class="card-img-top my-2"
+              alt={productInfo.name}
+              style={{ width: 200, height: 200 }}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{productInfo.name}</h5>
+              <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
+                {productInfo.price} SR
+              </p>
+            </div>
           </div>
         </div>
       );

@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_PRODUCT_DETAIL:
       return {
         ...state,
-        product: action.payload,
+        productInfo: action.payload,
         productInfoLoading: false
       };
 

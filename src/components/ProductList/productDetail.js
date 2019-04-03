@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
 
 class productDetail extends Component {
   render() {
+    let productID = this.props.match.params.productID;
+    alert("Hiiiiii");
     return (
       <div className="col-3">
         <div class="card my-3">
@@ -23,4 +27,20 @@ class productDetail extends Component {
   }
 }
 
-export default productDetail;
+const mapStateToProps = state => {
+  return {
+    productInfo: state.productsReducer.productInfo
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProductDetail: productID =>
+      dispatch(actionCreators.getProductDetail(productID))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(productDetail);
