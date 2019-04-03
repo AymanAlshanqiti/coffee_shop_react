@@ -14,7 +14,7 @@ class Navbar extends Component {
             src={require("../../assets/images/cafe.png")}
             style={{ width: 50 }}
           />
-          <span> Coffee Shop</span>
+          <span> Hug In Mug</span>
         </Link>
 
         <div className="collapse navbar-collapse " id="navbarNavDropdown">
