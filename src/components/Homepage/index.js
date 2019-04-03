@@ -2,12 +2,14 @@ import React, { Component } from "react";
 
 // Connectting with Redux
 import { connect } from "react-redux";
-import * as actionCreators from "../store/actions";
+import * as actionCreators from "../../store/actions";
+
+// Components
 
 class Home extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid my-4">
         <button onClick={this.props.hi}>Click Me!</button>
         <lable>{this.props.msg}</lable>
       </div>
