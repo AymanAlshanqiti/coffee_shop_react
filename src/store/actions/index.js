@@ -1,3 +1,3 @@
 export { hi } from "./ordersActions";
 // export {  } from "./productsActions";
-// export {  } from "./profileActions";
+export { fetchOrderDetail } from "./profileActions";

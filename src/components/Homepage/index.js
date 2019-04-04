@@ -2,33 +2,40 @@ import React, { Component } from "react";
 
 // Connectting with Redux
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions";
-
+import * as actionCreators from "../../store/actions/index";
+import * as red from "../../store/reducers/profileReducer";
 // Components
 class Home extends Component {
   render() {
+    console.log(red);
+    console.log("HIZQ");
+
+    // const orderDetail = filteredOrders.map(order => (
+    //   <OrderCard key={customer.username + customer_orders} />
+    // ));
+
     return (
       <div className="container-fluid my-4">
-        <button onClick={this.props.hi}>Click Me!</button>
-        <lable>{this.props.msg}</lable>
+        <button onClick={() => this.props.getOrderDetial(1)}>click me</button>
       </div>
     );
   }
 }
+// const mapStateToProps = state => {
+//   return {
+//     orderDetail:
 
-const mapStateToProps = state => {
-  return {
-    msg: state.ordersReducer.msg
-  };
-};
+//   };
+// };
 
 const mapDispatchToProps = dispatch => {
   return {
-    hi: () => dispatch(actionCreators.hi())
+    getOrderDetial: orderID =>
+      dispatch(actionCreators.fetchOrderDetail(orderID))
   };
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Home);
