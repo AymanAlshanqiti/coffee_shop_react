@@ -99,7 +99,6 @@ class ProductDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    // user: state.profileReducer.user,
     loading: state.productsReducer.productInfoLoading,
     productInfo: state.productsReducer.productInfo
   };
