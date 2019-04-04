@@ -72,14 +72,15 @@ export const logout = () => {
   return setCurrentUser();
 };
 
-export const fetchProfileDetail = ProfileDetail => {
+export const fetchProfileDetail = profileID => {
   return async dispatch => {
     try {
-      const res = await axios.post(`profile/detail/${profileID}/`);
-      const posts = res.data;
+      const res = await instance.post(`profile/detail/${profileID}/`);
+
+      const userprofile = res.data;
       dispatch({
         type: actionTypes.FETCH_PROFILE_DETAIL,
-        payload: profile
+        payload: userprofile
       });
     } catch (error) {
       console.error(error);
@@ -90,8 +91,8 @@ export const fetchProfileDetail = ProfileDetail => {
 export const ProfileUpdate = pk => {
   return async dispatch => {
     try {
-      const res = await axios.put(`profile/update/${profilePK}/`);
-      const posts = res.data;
+      const res = await instance.put(`profile/update/${profilePK}/`);
+      const profile = res.data;
       dispatch({
         type: actionTypes.PROFILE_UPDATE,
         payload: profile
