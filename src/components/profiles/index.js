@@ -34,7 +34,7 @@ class Profile extends Component {
         <div className="col-8 mx-4 my-4 text-center">
           <h2 style={{ color: "#fe687b" }}>
             <FontAwesomeIcon icon={faCoffee} style={{ color: "#fe687b" }} /> My
-            Previas orders
+            Previous orders
           </h2>
           <br />
           <ul class="list-group">
