@@ -1,7 +1,5 @@
 import * as actionsTypes from "./types";
 import axios from "axios";
-<<<<<<< HEAD
-=======
 
 // export const hi = () => {
 //   alert("Hi from ordersActions in redux");
@@ -23,4 +21,3 @@ import axios from "axios";
 //   } catch (err) {}
 // };
 // };
->>>>>>> master

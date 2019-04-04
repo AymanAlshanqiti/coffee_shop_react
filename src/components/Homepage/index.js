@@ -8,11 +8,10 @@ import * as actionCreators from "../../store/actions";
 import Navbar from "../navbar";
 import ProductsList from "../products";
 import productsData from "../products/productsData";
-import productDetail from "../products/productDetail";
+import productDetail from "../ProductList/productDetail";
 
 class Home extends Component {
   render() {
-<<<<<<< HEAD
     console.log("productsData", productsData);
     const productsList = productsData.map(product => {
       return <ProductsList product={product} key={product.id} />;
@@ -29,9 +28,6 @@ class Home extends Component {
         </div>
       </div>
     );
-=======
-    return <div className="container-fluid my-4" />;
->>>>>>> master
   }
 }
 
