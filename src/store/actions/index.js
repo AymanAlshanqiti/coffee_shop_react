@@ -5,3 +5,5 @@ export {
   getProductDetail,
   setLoading
 } from "./productsActions";
+
+export { setErrors } from "./errorsActions";
