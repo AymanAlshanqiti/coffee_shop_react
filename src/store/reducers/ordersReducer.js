@@ -1,8 +1,6 @@
 import * as actionsTypes from "../actions/types";
 
-const initialState = {
-  msg: "Hi from msg state in OrderReducer in redux"
-};
+const initialState = {};
 
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
