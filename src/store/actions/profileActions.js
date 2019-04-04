@@ -2,11 +2,9 @@ import * as actionTypes from "./types";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/"
 });
-
 
 export const checkForExpiredToken = () => {
   return async dispatch => {
@@ -90,7 +88,7 @@ export const fetchProfileDetail = profileID => {
   };
 };
 
-export const ProfileUpdate = pk => {
+export const ProfileUpdate = profilePK => {
   return async dispatch => {
     try {
       const res = await instance.put(`profile/update/${profilePK}/`);
@@ -104,7 +102,6 @@ export const ProfileUpdate = pk => {
     }
   };
 };
-
 
 export const fetchOrderDetail = orderID => {
   return async dispatch => {

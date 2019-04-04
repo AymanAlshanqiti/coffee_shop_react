@@ -1,6 +1,10 @@
-
-export { fetchOrderDetail } from "./profileActions";
-export { login, logout, signup, checkForExpiredToken } from "./productsActions";
+export {
+  login,
+  logout,
+  signup,
+  checkForExpiredToken,
+  fetchOrderDetail
+} from "./profileActions";
 export {
   getAllProducts,
   getProductDetail,
