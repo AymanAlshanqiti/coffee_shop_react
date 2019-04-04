@@ -1,4 +1,4 @@
-// export {  } from "./ordersActions";
+export { login, logout, signup, checkForExpiredToken } from "./productsActions";
 // export {  } from "./profileActions";
 export {
   getAllProducts,
