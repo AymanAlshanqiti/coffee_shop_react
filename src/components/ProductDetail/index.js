@@ -45,7 +45,7 @@ class ProductDetail extends Component {
                       <input
                         type="number"
                         max="1000"
-                        min="0"
+                        min="1"
                         placeholder="1"
                         className="form-control"
                         name="alias"

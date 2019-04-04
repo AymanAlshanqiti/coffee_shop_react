@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { deflate } from "zlib";
 
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/index";
+
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
@@ -69,4 +72,14 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapDispatchToProps = dispatch => {
+  return {
+    getOrderDetial: orderID =>
+      dispatch(actionCreators.fetchOrderDetail(orderID))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Profile);
