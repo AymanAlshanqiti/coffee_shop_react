@@ -1,1 +1,4 @@
 export const HI = "HI";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const FETCH_PROFILE_DETAIL = "FETCH_PROFILE_DETAIL";
+export const PROFILE_UPDATE = "PROFILE_UPDATE";

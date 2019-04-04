@@ -1,3 +1,3 @@
 export { hi } from "./ordersActions";
-// export {  } from "./productsActions";
+export { login, logout, signup, checkForExpiredToken } from "./productsActions";
 // export {  } from "./profileActions";
