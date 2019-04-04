@@ -37,14 +37,15 @@ class Navbar extends Component {
                   className="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a
+                  <Link
+                    to="/profile"
                     className="dropdown-item"
                     href="#"
                     style={{ color: "gray" }}
                   >
                     <FontAwesomeIcon icon={faUser} style={{ color: "gray" }} />{" "}
                     My Profile
-                  </a>
+                  </Link>
                   <a
                     className="dropdown-item"
                     href="#"
