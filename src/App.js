@@ -17,8 +17,29 @@ import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
 
 class App extends Component {
+  state = {
+    state: 1,
+    total_price: 0
+  };
+
   componentDidMount = async () => {
+    await this.props.login();
     await this.props.getAllProducts();
+    await this.props.checkForExpiredToken();
+    await this.props.getUserOrders();
+    this.getCartStatusOrder();
+  };
+
+  getCartStatusOrder = () => {
+    const cartStatusOrder = this.props.userOrders.find(order => {
+      return order.status === 1;
+    });
+
+    if (cartStatusOrder) {
+      this.props.getUserCartOrder(cartStatusOrder);
+    } else {
+      this.props.createOrder(this.state);
+    }
   };
 
   render() {
@@ -40,16 +61,27 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.profileReducer.user,
+    userOrders: state.ordersReducer.userOrders
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    getAllProducts: () => dispatch(actionCreators.getAllProducts())
-    // checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
+    login: () => dispatch(actionCreators.login()),
+    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
+    getAllProducts: () => dispatch(actionCreators.getAllProducts()),
+    getUserOrders: () => dispatch(actionCreators.getUserOrders()),
+    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
+    createOrder: order => dispatch(actionCreators.createOrder(order))
   };
 };
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(App)
 );

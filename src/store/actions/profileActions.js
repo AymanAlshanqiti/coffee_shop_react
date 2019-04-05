@@ -45,10 +45,13 @@ const setCurrentUser = user => ({
 export const login = (userData, history) => {
   return async dispatch => {
     try {
-      let response = await instance.post("login/", userData);
-      let user = response.data;
-      let decodedUser = jwt_decode(user.token);
-      setAuthToken(user.token);
+      // let response = await instance.post("login/", userData);
+      // let user = response.data;
+      const token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im9tZXIiLCJleHAiOjE1NTQ1MzAwOTYsImVtYWlsIjoiIn0.Hn9tQ9kPV2e_dIr8S9GYQmo92QS2C5Iewvkn_INwAmw";
+      let decodedUser = jwt_decode(token);
+
+      setAuthToken(token);
       dispatch(setCurrentUser(decodedUser));
       history.push("Profile");
     } catch (error) {

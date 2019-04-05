@@ -7,8 +7,24 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
-  componentDidMount() {
-    this.props.getProduct(this.props.match.params.productID);
+  state = {
+    order: this.props.userOrderStatusCart,
+    product: this.props.productInfo,
+    quantity: 1,
+    total_price: 0
+  };
+  componentDidMount = async () => {
+    await this.props.getProduct(this.props.match.params.productID);
+    this.addProduct();
+  };
+
+  addProduct() {
+    this.setState({
+      // total_price: this.state.quantity * this.props.productInfo.price
+      total_price: 40.0
+    });
+    // this.props.addProductToCart(this.state);
+    console.log("looooool", this.state);
   }
 
   render() {
@@ -49,7 +65,6 @@ class ProductDetail extends Component {
                         placeholder="1"
                         className="form-control"
                         name="alias"
-                        // onChange={this.textChange.bind(this)}
                       />
                     </div>
                     <input
@@ -57,6 +72,7 @@ class ProductDetail extends Component {
                       value="Add To Cart"
                       class="btn btn-light btn-block"
                       style={{ backgroundColor: "#fe687b", color: "#fff" }}
+                      // onClick={this.addProduct}
                     />{" "}
                     <br />
                   </form>
@@ -100,13 +116,17 @@ class ProductDetail extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.productsReducer.productInfoLoading,
-    productInfo: state.productsReducer.productInfo
+    productInfo: state.productsReducer.productInfo,
+    user: state.profileReducer.user,
+    userOrderStatusCart: state.ordersReducer.userOrderStatusCart
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProduct: prodID => dispatch(actionCreators.getProductDetail(prodID))
+    getProduct: prodID => dispatch(actionCreators.getProductDetail(prodID)),
+    addProductToCart: product =>
+      dispatch(actionCreators.addProductToCart(product))
   };
 };
 
