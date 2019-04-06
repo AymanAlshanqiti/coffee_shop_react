@@ -48,7 +48,7 @@ export const login = (userData, history) => {
       // let response = await instance.post("login/", userData);
       // let user = response.data;
       const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im9tZXIiLCJleHAiOjE1NTQ1MzAwOTYsImVtYWlsIjoiIn0.Hn9tQ9kPV2e_dIr8S9GYQmo92QS2C5Iewvkn_INwAmw";
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im9tZXIiLCJleHAiOjE1NTQ1ODg2ODUsImVtYWlsIjoiIn0.7DP3_mSr2a2yopLSiaFvDQ90S3S_1cKRUkKLfApjRnM";
       let decodedUser = jwt_decode(token);
 
       setAuthToken(token);
@@ -118,6 +118,60 @@ export const fetchOrderDetail = orderID => {
       });
     } catch (error) {
       console.error(error.response);
+    }
+  };
+};
+
+export const getUserOrders = () => {
+  return async dispatch => {
+    try {
+      const res = await instance.get("orders/list/");
+      const orders = res.data;
+
+      dispatch({
+        type: actionTypes.GET_USER_ORDERS,
+        payload: orders
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const getUserCartOrder = order => {
+  return {
+    type: actionTypes.GET_USER_CART_ORDER,
+    payload: order
+  };
+};
+
+export const createOrder = order => {
+  return async dispatch => {
+    try {
+      const res = await instance.post("orders/create/", order);
+      const newOrder = res.data;
+      dispatch({
+        type: actionTypes.CREATE_ORDER,
+        payload: newOrder
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const addProductToCart = product => {
+  return async dispatch => {
+    try {
+      const res = await instance.post("orderproduct/create/", product);
+      const newProduct = res.data;
+
+      dispatch({
+        type: actionTypes.ADD_PRODUCT_TO_CART,
+        payload: newProduct
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 };

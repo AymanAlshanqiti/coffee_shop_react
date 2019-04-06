@@ -5,7 +5,11 @@ export {
   logout,
   signup,
   checkForExpiredToken,
-  fetchOrderDetail
+  fetchOrderDetail,
+  getUserOrders,
+  getUserCartOrder,
+  createOrder,
+  addProductToCart
 } from "./profileActions";
 
 export {
@@ -14,9 +18,4 @@ export {
   setLoading
 } from "./productsActions";
 
-export {
-  getUserOrders,
-  getUserCartOrder,
-  createOrder,
-  addProductToCart
-} from "./ordersActions";
+// export {  } from "./ordersActions";

@@ -64,7 +64,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.profileReducer.user,
-    userOrders: state.ordersReducer.userOrders
+    userOrders: state.profileReducer.userOrders
   };
 };
 

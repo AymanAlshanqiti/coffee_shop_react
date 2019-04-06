@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 // Components
 import Loading from "../Loading";
 
@@ -8,27 +10,28 @@ import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
   state = {
-    order: this.props.userOrderStatusCart,
-    product: this.props.productInfo,
-    quantity: 1,
-    total_price: 0
+    order: null,
+    product: null,
+    quantity: null
   };
   componentDidMount = async () => {
     await this.props.getProduct(this.props.match.params.productID);
-    this.addProduct();
   };
 
-  addProduct() {
-    this.setState({
-      // total_price: this.state.quantity * this.props.productInfo.price
-      total_price: 40.0
-    });
-    // this.props.addProductToCart(this.state);
-    console.log("looooool", this.state);
+  quantityChange(e) {
+    this.setState({ quantity: e.target.value });
   }
 
   render() {
-    const { loading, productInfo } = this.props;
+    const { loading, productInfo, userOrderStatusCart } = this.props;
+
+    const addProduct = async () => {
+      await this.setState({
+        order: userOrderStatusCart.id,
+        product: productInfo.id
+      });
+      this.props.addProductToCart(this.state);
+    };
 
     if (loading) {
       return <Loading />;
@@ -64,16 +67,25 @@ class ProductDetail extends Component {
                         min="1"
                         placeholder="1"
                         className="form-control"
-                        name="alias"
+                        name="quantity"
+                        onChange={this.quantityChange.bind(this)}
                       />
                     </div>
-                    <input
-                      type="submit"
-                      value="Add To Cart"
-                      class="btn btn-light btn-block"
-                      style={{ backgroundColor: "#fe687b", color: "#fff" }}
-                      // onClick={this.addProduct}
-                    />{" "}
+                    <Link
+                      to={
+                        this.state.quantity >= 1
+                          ? "/products"
+                          : `/products/${this.props.productInfo.id}`
+                      }
+                    >
+                      <input
+                        type="submit"
+                        value="Add To Cart"
+                        class="btn btn-light btn-block"
+                        style={{ backgroundColor: "#fe687b", color: "#fff" }}
+                        onClick={() => addProduct()}
+                      />
+                    </Link>{" "}
                     <br />
                   </form>
                 </div>
@@ -118,7 +130,7 @@ const mapStateToProps = state => {
     loading: state.productsReducer.productInfoLoading,
     productInfo: state.productsReducer.productInfo,
     user: state.profileReducer.user,
-    userOrderStatusCart: state.ordersReducer.userOrderStatusCart
+    userOrderStatusCart: state.profileReducer.userOrderStatusCart
   };
 };
 
