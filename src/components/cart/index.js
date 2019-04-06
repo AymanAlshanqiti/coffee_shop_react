@@ -6,10 +6,11 @@ import { connect } from "react-redux";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
-
-// Components
-// import { productsRows } from "./productsRows";
+import {
+  faTrash,
+  faShoppingBasket,
+  faMoneyBill
+} from "@fortawesome/free-solid-svg-icons";
 
 class Cart extends Component {
   state = {
@@ -25,10 +26,23 @@ class Cart extends Component {
 
   render() {
     console.log("[CartOrderObj] => ", this.state);
+    let cartProducts = null;
     if (this.state.cartProducts) {
-      this.state.cartProducts.map(product =>
-        console.log("[CartOrderObj ---- 1] => ", product)
-      );
+      cartProducts = this.state.cartProducts.map(product => (
+        <tr>
+          <th scope="row">{product.product.name}</th>
+          <td>product.quantity</td>
+          <td>
+            <span>product.total_price</span> SR
+          </td>
+          <td className="text-center">
+            <button className="btn btn-danger">
+              <FontAwesomeIcon icon={faTrash} style={{ color: "#FFF" }} />{" "}
+              Remove
+            </button>
+          </td>
+        </tr>
+      ));
     }
 
     return (
@@ -43,7 +57,7 @@ class Cart extends Component {
               My Cart
             </h2>
             <br />
-            <table className="table table-hover">
+            <table className="table table-hover text-left">
               <thead>
                 <tr>
                   <th scope="col">Product</th>
@@ -53,20 +67,24 @@ class Cart extends Component {
                 </tr>
               </thead>
               <tbody>
-                {/* {productsRows} */}
+                {cartProducts}
                 <tr>
-                  <th scope="row">2</th>
-                  <td>6</td>
-                  <td>
-                    <span>39.98</span> SR
-                  </td>
-                  <td>
-                    <button className="btn btn-danger">
+                  <th scope="row">Total Price</th>
+                  <td />
+                  <th scope="row">
+                    <span>0.00</span> SR
+                  </th>
+
+                  <td className="text-center">
+                    <button
+                      className="btn btn-danger"
+                      style={{ color: "#FFF", backgroundColor: "#fe687b" }}
+                    >
                       <FontAwesomeIcon
-                        icon={faTrash}
+                        icon={faMoneyBill}
                         style={{ color: "#FFF" }}
                       />{" "}
-                      Remove
+                      Checkout
                     </button>
                   </td>
                 </tr>
