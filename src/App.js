@@ -15,6 +15,7 @@ import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
+import Cart from "../src/components/cart";
 
 class App extends Component {
   state = {
@@ -27,10 +28,10 @@ class App extends Component {
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
 
-    // if (this.props.user) {
-    await this.props.getUserOrders();
-    this.getCartStatusOrder();
-    // }
+    if (this.props.user) {
+      await this.props.getUserOrders();
+      this.getCartStatusOrder();
+    }
   };
 
   getCartStatusOrder = () => {
@@ -55,6 +56,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/Profile" component={Profile} />
             <Route exact path="/products" component={ProductList} />
+            <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />
           </Switch>
