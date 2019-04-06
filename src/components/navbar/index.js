@@ -18,6 +18,9 @@ class Navbar extends Component {
             />
             <span> Hug In Mug</span>
           </Link>
+          <Link to="/cart" className="">
+            Cart
+          </Link>
         </div>
         <div className="col-3 align-right">
           <div className="collapse navbar-collapse " id="navbarNavDropdown">
