@@ -13,20 +13,23 @@ import { faTrash, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
 class Cart extends Component {
   state = {
-    cartOrderID: null
+    cartProducts: null
   };
 
   componentDidMount = async () => {
-    this.setState({
-      cartOrderID: this.props.userOrderStatusCart.id
-    });
     if (this.props.userOrderStatusCart) {
       await this.props.getUserCart(this.props.userOrderStatusCart.id);
+      await this.setState({ cartProducts: this.props.userCart });
     }
   };
 
   render() {
-    console.log("[CartOrderObj] => ", this.state.cartOrderID);
+    console.log("[CartOrderObj] => ", this.state);
+    if (this.state.cartProducts) {
+      this.state.cartProducts.map(product =>
+        console.log("[CartOrderObj ---- 1] => ", product)
+      );
+    }
 
     return (
       <div className="row justify-content-md-center">
