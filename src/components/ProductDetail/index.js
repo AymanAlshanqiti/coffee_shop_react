@@ -30,7 +30,9 @@ class ProductDetail extends Component {
         order: userOrderStatusCart.id,
         product: productInfo.id
       });
-      this.props.addProductToCart(this.state);
+      if (this.state.quantity >= 1) {
+        this.props.addProductToCart(this.state);
+      }
     };
 
     if (loading) {
