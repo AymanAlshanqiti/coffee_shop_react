@@ -24,6 +24,11 @@ class Cart extends Component {
     }
   };
 
+  handleDeleteProduct = async productID => {
+    alert(`hiiiii ${productID}`);
+    await this.props.deleteCartProduct(productID);
+  };
+
   render() {
     console.log("[CartOrderObj] => ", this.state);
     let cartProducts = null;
@@ -31,12 +36,15 @@ class Cart extends Component {
       cartProducts = this.state.cartProducts.map(product => (
         <tr>
           <th scope="row">{product.product.name}</th>
-          <td>product.quantity</td>
+          <td>{product.quantity}</td>
           <td>
-            <span>product.total_price</span> SR
+            <span>{product.total_price}</span> SR
           </td>
           <td className="text-center">
-            <button className="btn btn-danger">
+            <button
+              className="btn btn-danger"
+              onClick={() => this.handleDeleteProduct(product.id)}
+            >
               <FontAwesomeIcon icon={faTrash} style={{ color: "#FFF" }} />{" "}
               Remove
             </button>
@@ -106,7 +114,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID))
+    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
+    deleteCartProduct: orderID =>
+      dispatch(actionCreators.deleteCartProduct(orderID))
   };
 };
 
