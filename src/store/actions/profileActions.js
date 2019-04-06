@@ -45,10 +45,13 @@ const setCurrentUser = user => ({
 export const login = (userData, history) => {
   return async dispatch => {
     try {
-      let response = await instance.post("login/", userData);
-      let user = response.data;
-      let decodedUser = jwt_decode(user.token);
-      setAuthToken(user.token);
+      // let response = await instance.post("login/", userData);
+      // let user = response.data;
+      const token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImF5bWFuIiwiZXhwIjoxNTU0NTkxNDM2LCJlbWFpbCI6IiJ9.IYYwOlND8a-wzk3lP1njiHbWdTugxD_DgQ3LalXDaM0";
+      let decodedUser = jwt_decode(token);
+
+      setAuthToken(token);
       dispatch(setCurrentUser(decodedUser));
       history.push("Profile");
     } catch (error) {
@@ -115,6 +118,62 @@ export const fetchOrderDetail = orderID => {
       });
     } catch (error) {
       console.error(error.response);
+    }
+  };
+};
+
+export const getUserOrders = () => {
+  return async dispatch => {
+    try {
+      const res = await instance.get("orders/list/");
+      const orders = res.data;
+
+      dispatch({
+        type: actionTypes.GET_USER_ORDERS,
+        payload: orders
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const getUserCartOrder = order => {
+  return {
+    type: actionTypes.GET_USER_CART_ORDER,
+    payload: order
+  };
+};
+
+export const createOrder = order => {
+  return async dispatch => {
+    try {
+      const res = await instance.post("orders/create/", order);
+      const newOrder = res.data;
+      dispatch({
+        type: actionTypes.CREATE_ORDER,
+        payload: newOrder
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const addProductToCart = product => {
+  console.log("[add product to the cart] =>", product);
+
+  return async dispatch => {
+    try {
+      const res = await instance.post("orderproduct/create/", product);
+      const newProduct = res.data;
+
+      dispatch({
+        type: actionTypes.ADD_PRODUCT_TO_CART,
+        payload: newProduct
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 };

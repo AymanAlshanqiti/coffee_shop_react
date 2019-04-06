@@ -1,14 +1,21 @@
+export { setErrors } from "./errorsActions";
+
 export {
   login,
   logout,
   signup,
   checkForExpiredToken,
-  fetchOrderDetail
+  fetchOrderDetail,
+  getUserOrders,
+  getUserCartOrder,
+  createOrder,
+  addProductToCart
 } from "./profileActions";
+
 export {
   getAllProducts,
   getProductDetail,
   setLoading
 } from "./productsActions";
-export { setErrors } from "./errorsActions";
-// export {  } from "./profileActions";
+
+// export {  } from "./ordersActions";

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 // Components
 import Loading from "../Loading";
 
@@ -7,12 +9,30 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
-  componentDidMount() {
-    this.props.getProduct(this.props.match.params.productID);
+  state = {
+    order: null,
+    product: null,
+    quantity: 1
+  };
+  componentDidMount = async () => {
+    await this.props.getProduct(this.props.match.params.productID);
+    await this.setState({
+      order: this.props.userOrderStatusCart.id,
+      product: this.props.productInfo.id
+    });
+  };
+
+  quantityChange(e) {
+    this.setState({ quantity: e.target.value });
   }
 
   render() {
     const { loading, productInfo } = this.props;
+
+    const addProduct = async () => {
+      await this.props.addProductToCart(this.state);
+    };
+    console.log("[Product detail state]  =>", this.state);
 
     if (loading) {
       return <Loading />;
@@ -20,10 +40,13 @@ class ProductDetail extends Component {
       return (
         <div className="row">
           <div className="col-3 mx-4">
-            <div class="card my-4 align-items-center" style={{ height: 500 }}>
+            <div
+              className="card my-4 align-items-center"
+              style={{ height: 500 }}
+            >
               <img
                 src={productInfo.image}
-                class="card-img-top my-2"
+                className="card-img-top my-2"
                 alt={productInfo.name}
                 style={{ width: 200, height: 200 }}
               />
@@ -48,16 +71,25 @@ class ProductDetail extends Component {
                         min="1"
                         placeholder="1"
                         className="form-control"
-                        name="alias"
-                        // onChange={this.textChange.bind(this)}
+                        name="quantity"
+                        onChange={this.quantityChange.bind(this)}
                       />
                     </div>
-                    <input
-                      type="submit"
-                      value="Add To Cart"
-                      class="btn btn-light btn-block"
-                      style={{ backgroundColor: "#fe687b", color: "#fff" }}
-                    />{" "}
+                    <Link
+                      to={
+                        this.state.quantity >= 1
+                          ? "/products"
+                          : `/products/${this.props.productInfo.id}`
+                      }
+                    >
+                      <input
+                        type="submit"
+                        value="Add To Cart"
+                        className="btn btn-light btn-block"
+                        style={{ backgroundColor: "#fe687b", color: "#fff" }}
+                        onClick={() => addProduct()}
+                      />
+                    </Link>{" "}
                     <br />
                   </form>
                 </div>
@@ -65,7 +97,7 @@ class ProductDetail extends Component {
             </div>
           </div>
           <div className="col-8 mx-4">
-            <div class="card my-4 align-items-left" style={{ height: 500 }}>
+            <div className="card my-4 align-items-left" style={{ height: 500 }}>
               <div className="card-body text-center">
                 <h5 className="card-title my-5">{productInfo.description}</h5>
                 <div className="row ">
@@ -100,13 +132,17 @@ class ProductDetail extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.productsReducer.productInfoLoading,
-    productInfo: state.productsReducer.productInfo
+    productInfo: state.productsReducer.productInfo,
+    user: state.profileReducer.user,
+    userOrderStatusCart: state.profileReducer.userOrderStatusCart
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProduct: prodID => dispatch(actionCreators.getProductDetail(prodID))
+    getProduct: prodID => dispatch(actionCreators.getProductDetail(prodID)),
+    addProductToCart: product =>
+      dispatch(actionCreators.addProductToCart(product))
   };
 };
 
