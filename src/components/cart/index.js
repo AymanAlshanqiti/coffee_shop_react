@@ -16,11 +16,13 @@ class Cart extends Component {
     cartOrderID: null
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.setState({
       cartOrderID: this.props.userOrderStatusCart.id
     });
-    // await this.props.getUserCart(this.state.cartOrderID);
+    if (this.props.userOrderStatusCart) {
+      await this.props.getUserCart(this.props.userOrderStatusCart.id);
+    }
   };
 
   render() {

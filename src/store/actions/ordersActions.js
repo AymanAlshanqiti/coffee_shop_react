@@ -9,9 +9,7 @@ export const getUserCart = orderID => {
   console.log("TCL: orderID => from getUserCart action =>", orderID);
   return async dispatch => {
     try {
-      const res = await instance.get(
-        `http://127.0.0.1:8000/api/orders/detail/${orderID}`
-      );
+      const res = await instance.get(`/orders/detail/${orderID}/`);
       const cartObj = res.data;
       dispatch({
         type: actionTypes.GET_USER_CART,
