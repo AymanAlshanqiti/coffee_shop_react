@@ -19,4 +19,4 @@ export {
   setLoading
 } from "./productsActions";
 
-export { getUserCart } from "./ordersActions";
+export { getUserCart, deleteCartProduct } from "./ordersActions";

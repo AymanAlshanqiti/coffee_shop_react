@@ -6,7 +6,6 @@ const instance = axios.create({
 });
 
 export const getUserCart = orderID => {
-  console.log("TCL: orderID => from getUserCart action =>", orderID);
   return async dispatch => {
     try {
       const res = await instance.get(`/orders/detail/${orderID}/`);
@@ -15,6 +14,17 @@ export const getUserCart = orderID => {
         type: actionTypes.GET_USER_CART,
         payload: cartObj
       });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const deleteCartProduct = orderID => {
+  return async dispatch => {
+    try {
+      const res = await instance.delete(`/orderproduct/delete/${orderID}/`);
+      console.log("jjjjjjjjjjjjjjjjjjjjjooo", res.data);
     } catch (error) {
       console.error(error);
     }
