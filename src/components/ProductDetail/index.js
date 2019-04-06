@@ -41,10 +41,13 @@ class ProductDetail extends Component {
       return (
         <div className="row">
           <div className="col-3 mx-4">
-            <div class="card my-4 align-items-center" style={{ height: 500 }}>
+            <div
+              className="card my-4 align-items-center"
+              style={{ height: 500 }}
+            >
               <img
                 src={productInfo.image}
-                class="card-img-top my-2"
+                className="card-img-top my-2"
                 alt={productInfo.name}
                 style={{ width: 200, height: 200 }}
               />
@@ -83,7 +86,7 @@ class ProductDetail extends Component {
                       <input
                         type="submit"
                         value="Add To Cart"
-                        class="btn btn-light btn-block"
+                        className="btn btn-light btn-block"
                         style={{ backgroundColor: "#fe687b", color: "#fff" }}
                         onClick={() => addProduct()}
                       />
@@ -95,7 +98,7 @@ class ProductDetail extends Component {
             </div>
           </div>
           <div className="col-8 mx-4">
-            <div class="card my-4 align-items-left" style={{ height: 500 }}>
+            <div className="card my-4 align-items-left" style={{ height: 500 }}>
               <div className="card-body text-center">
                 <h5 className="card-title my-5">{productInfo.description}</h5>
                 <div className="row ">

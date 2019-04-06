@@ -48,7 +48,7 @@ export const login = (userData, history) => {
       // let response = await instance.post("login/", userData);
       // let user = response.data;
       const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im9tZXIiLCJleHAiOjE1NTQ1ODg2ODUsImVtYWlsIjoiIn0.7DP3_mSr2a2yopLSiaFvDQ90S3S_1cKRUkKLfApjRnM";
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImF5bWFuIiwiZXhwIjoxNTU0NTkxNDM2LCJlbWFpbCI6IiJ9.IYYwOlND8a-wzk3lP1njiHbWdTugxD_DgQ3LalXDaM0";
       let decodedUser = jwt_decode(token);
 
       setAuthToken(token);

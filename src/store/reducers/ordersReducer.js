@@ -1,5 +1,3 @@
-import * as actionTypes from "../actions/types";
-
 const initialState = {};
 
 const ordersReducer = (state = initialState, action) => {

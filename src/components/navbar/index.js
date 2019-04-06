@@ -8,12 +8,13 @@ import { faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 class Navbar extends Component {
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="col-9">
           <Link to="/products" className="navbar-brand">
             <img
               src={require("../../assets/images/cafe.png")}
               style={{ width: 50 }}
+              alt="Hug In Mug"
             />
             <span> Hug In Mug</span>
           </Link>
@@ -24,7 +25,7 @@ class Navbar extends Component {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                  href=" "
                   id="navbarDropdownMenuLink"
                   role="button"
                   data-toggle="dropdown"
@@ -40,7 +41,6 @@ class Navbar extends Component {
                   <Link
                     to="/profile"
                     className="dropdown-item"
-                    href="#"
                     style={{ color: "gray" }}
                   >
                     <FontAwesomeIcon icon={faUser} style={{ color: "gray" }} />{" "}
@@ -48,7 +48,7 @@ class Navbar extends Component {
                   </Link>
                   <a
                     className="dropdown-item"
-                    href="#"
+                    href=" "
                     style={{ color: "gray" }}
                   >
                     <FontAwesomeIcon

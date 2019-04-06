@@ -6,10 +6,10 @@ class ProductsCards extends Component {
     const product = this.props.product;
     return (
       <div className="col-4">
-        <div class="card my-4 align-items-center">
+        <div className="card my-4 align-items-center">
           <img
             src={product.image}
-            class="card-img-top my-2"
+            className="card-img-top my-2"
             alt={product.name}
             style={{ width: 200, height: 200 }}
           />
@@ -22,7 +22,7 @@ class ProductsCards extends Component {
             </p>
             <Link
               to={`/products/${product.id}`}
-              class="btn btn-light btn-block"
+              className="btn btn-light btn-block"
               style={{ backgroundColor: "#fe687b", color: "#fff" }}
             >
               Detail

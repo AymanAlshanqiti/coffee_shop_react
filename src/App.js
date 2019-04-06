@@ -26,8 +26,11 @@ class App extends Component {
     await this.props.login();
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
-    await this.props.getUserOrders();
-    this.getCartStatusOrder();
+
+    if (this.props.user) {
+      await this.props.getUserOrders();
+      this.getCartStatusOrder();
+    }
   };
 
   getCartStatusOrder = () => {
