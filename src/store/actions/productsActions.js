@@ -17,7 +17,6 @@ export const getAllProducts = () => {
         type: actionTypes.GET_ALL_PRODUCTS,
         payload: products
       });
-      dispatch(setErrors(null));
     } catch (error) {
       dispatch(setErrors(error));
       console.error(error);
@@ -36,8 +35,6 @@ export const getProductDetail = prodID => {
         type: actionTypes.GET_PRODUCT_DETAIL,
         payload: productInfo
       });
-
-      dispatch(setErrors(null));
     } catch (error) {
       dispatch(setErrors(error));
       console.error(error);
