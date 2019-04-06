@@ -12,10 +12,14 @@ class ProductDetail extends Component {
   state = {
     order: null,
     product: null,
-    quantity: null
+    quantity: 1
   };
   componentDidMount = async () => {
     await this.props.getProduct(this.props.match.params.productID);
+    await this.setState({
+      order: this.props.userOrderStatusCart.id,
+      product: this.props.productInfo.id
+    });
   };
 
   quantityChange(e) {
@@ -23,17 +27,12 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { loading, productInfo, userOrderStatusCart } = this.props;
+    const { loading, productInfo } = this.props;
 
     const addProduct = async () => {
-      await this.setState({
-        order: userOrderStatusCart.id,
-        product: productInfo.id
-      });
-      if (this.state.quantity >= 1) {
-        this.props.addProductToCart(this.state);
-      }
+      await this.props.addProductToCart(this.state);
     };
+    console.log("[Product detail state]  =>", this.state);
 
     if (loading) {
       return <Loading />;

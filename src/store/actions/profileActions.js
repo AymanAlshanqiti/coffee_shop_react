@@ -161,6 +161,8 @@ export const createOrder = order => {
 };
 
 export const addProductToCart = product => {
+  console.log("[add product to the cart] =>", product);
+
   return async dispatch => {
     try {
       const res = await instance.post("orderproduct/create/", product);
