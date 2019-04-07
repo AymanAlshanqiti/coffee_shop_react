@@ -36,9 +36,9 @@ class RegistrationForm extends Component {
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
           <h5 className="card-title mb-4">
-            {type === "login"
+            {/* {type === "login"
               ? "Login to enjoy our hugs"
-              : "Register an account"}
+              : "Register an account"} */}
           </h5>
           <form onSubmit={event => this.submitHandler(event, type)}>
             <div className="form-group">
