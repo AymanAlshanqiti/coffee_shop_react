@@ -10,7 +10,8 @@ import { faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import {
   faIdCard,
   faSignInAlt,
-  faUserPlus
+  faUserPlus,
+  faShoppingBasket
 } from "@fortawesome/free-solid-svg-icons";
 
 class Navbar extends Component {
@@ -26,11 +27,22 @@ class Navbar extends Component {
             />
             <span> Hug In Mug</span>
           </Link>
-          {this.props.user && <Link to="/cart">Cart</Link>}
         </div>
-        <div className="col-3 align-right">
+
+        <div className="col-4 align-right">
           {this.props.user ? (
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
+              {this.props.user && (
+                <Link to="/cart">
+                  <FontAwesomeIcon
+                    icon={faShoppingBasket}
+                    style={{
+                      color: "#fe687b",
+                      fontSize: 25
+                    }}
+                  />{" "}
+                </Link>
+              )}
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <a
