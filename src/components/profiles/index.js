@@ -6,7 +6,7 @@ import * as actionCreators from "../../store/actions/index";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-
+import RegistrationForm from "./RegistrationForm";
 class Profile extends Component {
   render() {
     return (
@@ -20,9 +20,9 @@ class Profile extends Component {
               style={{ width: 200, height: 200 }}
             />
             <div className="card-body text-center">
-              <h5 className="card-title">@ayman</h5>
+              <h5 className="card-title">@MG</h5>
               <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
-                Ayman Alshanqiti
+                Mohammed.MG
               </p>
               <div className="row justify-content-md-center my-5">
                 <br />
@@ -77,8 +77,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(actionCreators.fetchOrderDetail(orderID))
   };
 };
-
+const mapStateToProps = state => ({
+  user: state.profileReducer.user
+});
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Profile);

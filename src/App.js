@@ -15,7 +15,9 @@ import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
+import RegistrationForm from "./components/profiles/RegistrationForm";
 import Cart from "../src/components/cart";
+
 
 class App extends Component {
   state = {
@@ -45,6 +47,9 @@ class App extends Component {
       this.props.createOrder(this.state);
     }
   };
+  componentDidMount() {
+    this.props.checkForExpiredToken();
+  }
 
   render() {
     return (
@@ -56,6 +61,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/Profile" component={Profile} />
             <Route exact path="/products" component={ProductList} />
+            <Route exact path="/(login|signup)" component={RegistrationForm} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />
@@ -75,8 +81,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+
     login: () => dispatch(actionCreators.login()),
-    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
+    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
     getAllProducts: () => dispatch(actionCreators.getAllProducts()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
