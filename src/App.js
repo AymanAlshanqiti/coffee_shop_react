@@ -25,7 +25,7 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    await this.props.login();
+    // await this.props.login();
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
 
@@ -46,9 +46,6 @@ class App extends Component {
       this.props.createOrder(this.state);
     }
   };
-  componentDidMount() {
-    this.props.checkForExpiredToken();
-  }
 
   render() {
     return (
@@ -58,7 +55,11 @@ class App extends Component {
         </div>
         <div className="container-fluid my-4">
           <Switch>
+            {/* {this.props.user && (
+              <Route exact path="/Profile" component={Profile} />
+            )} */}
             <Route exact path="/Profile" component={Profile} />
+
             <Route exact path="/products" component={ProductList} />
             <Route exact path="/(login|signup)" component={RegistrationForm} />
             <Route exact path="/cart" component={Cart} />

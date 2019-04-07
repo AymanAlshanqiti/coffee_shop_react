@@ -46,7 +46,7 @@ export const login = (userData, history) => {
   return async dispatch => {
     try {
       const response = await instance.post("login/", userData);
-      const token = response.data.token
+      const token = response.data.token;
       let decodedUser = jwt_decode(token);
 
       setAuthToken(token);
@@ -73,11 +73,10 @@ export const logout = () => {
   return setCurrentUser();
 };
 
-export const fetchProfileDetail = profileID => {
+export const fetchProfileDetail = () => {
   return async dispatch => {
     try {
-      const res = await instance.post(`profile/detail/${profileID}/`);
-
+      const res = await instance.get("profile/detail/");
       const userprofile = res.data;
       dispatch({
         type: actionTypes.FETCH_PROFILE_DETAIL,
