@@ -74,7 +74,6 @@ export const fetchProfileDetail = profileID => {
   return async dispatch => {
     try {
       const res = await instance.post(`profile/detail/${profileID}/`);
-
       const userprofile = res.data;
       dispatch({
         type: actionTypes.FETCH_PROFILE_DETAIL,
@@ -122,7 +121,6 @@ export const getUserOrders = () => {
     try {
       const res = await instance.get("orders/list/");
       const orders = res.data;
-
       dispatch({
         type: actionTypes.GET_USER_ORDERS,
         payload: orders

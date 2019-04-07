@@ -25,14 +25,13 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    await this.props.login();
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
 
-    if (this.props.user) {
-      await this.props.getUserOrders();
-      this.getCartStatusOrder();
-    }
+    // if (this.props.user) {
+    //   await this.props.getUserOrders();
+    //   this.getCartStatusOrder();
+    // }
   };
 
   getCartStatusOrder = () => {
@@ -46,9 +45,6 @@ class App extends Component {
       this.props.createOrder(this.state);
     }
   };
-  componentDidMount() {
-    this.props.checkForExpiredToken();
-  }
 
   render() {
     return (
@@ -73,19 +69,18 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.profileReducer.user,
-    userOrders: state.profileReducer.userOrders
+    user: state.profileReducer.user
+    // userOrders: state.profileReducer.userOrders
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: () => dispatch(actionCreators.login()),
     checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
-    getAllProducts: () => dispatch(actionCreators.getAllProducts()),
-    getUserOrders: () => dispatch(actionCreators.getUserOrders()),
-    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
-    createOrder: order => dispatch(actionCreators.createOrder(order))
+    getAllProducts: () => dispatch(actionCreators.getAllProducts())
+    // getUserOrders: () => dispatch(actionCreators.getUserOrders()),
+    // getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
+    // createOrder: order => dispatch(actionCreators.createOrder(order))
   };
 };
 
