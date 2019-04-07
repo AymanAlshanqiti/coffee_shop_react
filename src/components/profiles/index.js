@@ -12,10 +12,10 @@ class Profile extends Component {
     return (
       <div className="row my-4">
         <div className="col-3 mx-4">
-          <div class="card my-4 align-items-center" style={{ height: 500 }}>
+          <div className="card my-4 align-items-center" style={{ height: 500 }}>
             <img
               src={require("../../assets/images/cafe.png")}
-              class="card-img-top my-2"
+              className="card-img-top my-2"
               alt="user_pic"
               style={{ width: 200, height: 200 }}
             />
@@ -36,29 +36,29 @@ class Profile extends Component {
             Previous orders
           </h2>
           <br />
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+          <ul className="list-group">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
               Cras justo odio
               <span
-                class="badge badge-primary badge-pill"
+                className="badge badge-primary badge-pill"
                 style={{ backgroundColor: "#fe687b" }}
               >
                 14
               </span>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
               Dapibus ac facilisis in
               <span
-                class="badge badge-primary badge-pill"
+                className="badge badge-primary badge-pill"
                 style={{ backgroundColor: "#fe687b" }}
               >
                 2
               </span>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
               Morbi leo risus
               <span
-                class="badge badge-primary badge-pill"
+                className="badge badge-primary badge-pill"
                 style={{ backgroundColor: "#fe687b" }}
               >
                 1
