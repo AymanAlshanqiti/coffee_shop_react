@@ -17,6 +17,7 @@ import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
 import RegistrationForm from "./components/profiles/RegistrationForm";
 import Cart from "../src/components/cart";
+import LoginForm from "./components/profiles/LoginForm";
 
 class App extends Component {
   state = {
@@ -60,7 +61,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/Profile" component={Profile} />
             <Route exact path="/products" component={ProductList} />
-            <Route exact path="/(login|signup)" component={RegistrationForm} />
+            <Route exact path="/signup" component={RegistrationForm} />
+            <Route exact path="/login" component={LoginForm} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />

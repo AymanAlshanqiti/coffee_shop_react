@@ -3,11 +3,8 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
 import { Link } from "react-router-dom";
 
-class RegistrationForm extends Component {
+class LoginForm extends Component {
   state = {
-    firstName: "",
-    lastName: "",
-    email: "",
     username: "",
     password: ""
   };
@@ -23,9 +20,7 @@ class RegistrationForm extends Component {
 
   submitHandler = (e, type) => {
     e.preventDefault();
-    if (type === "signup") {
-      this.props.signup(this.state, this.props.history);
-    } else {
+    if (type === "login") {
       this.props.login(this.state, this.props.history);
     }
   };
@@ -36,9 +31,9 @@ class RegistrationForm extends Component {
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
           <h5 className="card-title mb-4">
-            {type === "login"
+            {/* {type === "login"
               ? "Login to enjoy our hugs"
-              : "Register an account"}
+              : "Register an account"} */}
           </h5>
           <form onSubmit={event => this.submitHandler(event, type)}>
             <div className="form-group">
@@ -59,33 +54,7 @@ class RegistrationForm extends Component {
                 onChange={this.changeHandler}
               />
             </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="First Name"
-                name="first_name"
-                onChange={this.changeHandler}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Last Name"
-                name="last_name"
-                onChange={this.changeHandler}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Email"
-                name="email"
-                onChange={this.changeHandler}
-              />
-            </div>
+
             <input
               className="btn btn-primary"
               type="submit"
@@ -109,17 +78,13 @@ class RegistrationForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  signup: (userData, history) =>
-    dispatch(actionCreators.signup(userData, history))
+  login: (userData, history) =>
+    dispatch(actionCreators.login(userData, history))
 });
 const mapStateToProps = state => ({
   user: state.profileReducer.user
 });
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RegistrationForm);
-// export default connect(
-//     mapStateToProps,
-// )(RegistrationForm);
+)(LoginForm);
