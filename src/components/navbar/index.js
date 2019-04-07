@@ -7,9 +7,9 @@ import { connect } from "react-redux";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import AuthButton from "./AuthButton";
 import {
-  faSignOutAlt,
+  faIdBadge,
+  faIdCard,
   faSignInAlt,
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
@@ -43,6 +43,12 @@ class Navbar extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      style={{ color: "gray" }}
+                    />{" "}
+                    <span>Welcome </span>
                     {this.props.user.username}{" "}
                   </a>
                   <div
@@ -56,7 +62,7 @@ class Navbar extends Component {
                         style={{ color: "gray" }}
                       >
                         <FontAwesomeIcon
-                          icon={faUser}
+                          icon={faIdCard}
                           style={{ color: "gray" }}
                         />{" "}
                         My Profile
@@ -80,11 +86,11 @@ class Navbar extends Component {
             </div>
           ) : (
             <div>
-              <Link to="/login">
-                <FontAwesomeIcon icon={faSignInAlt} /> Login
-              </Link>
-              <Link to="/signup">
+              <Link to="/signup" className="btn btn-outline-secondary mx-3">
                 <FontAwesomeIcon icon={faUserPlus} /> Signup
+              </Link>
+              <Link to="/login" className="btn btn-info">
+                <FontAwesomeIcon icon={faSignInAlt} /> Login
               </Link>
             </div>
           )}
