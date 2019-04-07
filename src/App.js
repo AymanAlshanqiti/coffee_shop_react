@@ -54,10 +54,11 @@ class App extends Component {
         </div>
         <div className="container-fluid my-4">
           <Switch>
-            <Route exact path="/Profile" component={Profile} />
+            {this.props.user &&
+              (<Route exact path="/Profile" component={Profile} />,
+              <Route exact path="/cart" component={Cart} />)}
             <Route exact path="/products" component={ProductList} />
             <Route exact path="/(login|signup)" component={RegistrationForm} />
-            <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />
           </Switch>
@@ -69,18 +70,27 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.profileReducer.user
-    // userOrders: state.profileReducer.userOrders
+    user: state.profileReducer.user,
+    userLoading: state.profileReducer.userLoading,
+
+    userOrders: state.profileReducer.userOrders,
+    userOrdersLoading: state.profileReducer.userOrdersLoading,
+
+    userOrderStatusCart: state.profileReducer.userOrderStatusCart,
+    userOrderStatusCartLoading: state.profileReducer.userOrderStatusCartLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    getAllProducts: () => dispatch(actionCreators.getAllProducts()),
     checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
-    getAllProducts: () => dispatch(actionCreators.getAllProducts())
-    // getUserOrders: () => dispatch(actionCreators.getUserOrders()),
-    // getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
-    // createOrder: order => dispatch(actionCreators.createOrder(order))
+    getUserOrders: () => dispatch(actionCreators.getUserOrders()),
+    createOrder: order => dispatch(actionCreators.createOrder(order)),
+    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
+    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
+    deleteCartProduct: orderProductID =>
+      dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 

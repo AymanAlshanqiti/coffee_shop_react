@@ -137,8 +137,7 @@ class Cart extends Component {
                       className="text-center"
                       style={{ color: "#fe687b" }}
                     >
-                      <span>{this.props.userOrderStatusCart.total_price}</span>{" "}
-                      SR
+                      <span>{this.props.userCart.total_price}</span> SR
                     </th>
 
                     <td className="text-center">
