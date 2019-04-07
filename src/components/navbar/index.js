@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import {
-  faIdBadge,
   faIdCard,
   faSignInAlt,
   faUserPlus
