@@ -18,7 +18,6 @@ import Profile from "../src/components/profiles";
 import RegistrationForm from "./components/profiles/RegistrationForm";
 import Cart from "../src/components/cart";
 
-
 class App extends Component {
   state = {
     state: 1,
@@ -81,9 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
     login: () => dispatch(actionCreators.login()),
-    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
+    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
     getAllProducts: () => dispatch(actionCreators.getAllProducts()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
