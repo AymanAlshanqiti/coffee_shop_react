@@ -48,13 +48,12 @@ class Cart extends Component {
     }
   };
 
-  handleDeleteProduct = async productID => {
-    await this.props.deleteCartProduct(productID);
+  handleDeleteProduct = async orderProductID => {
+    await this.props.deleteCartProduct(orderProductID);
+    await this.props.getUserCart(this.props.userOrderStatusCart.id);
   };
 
   render() {
-    console.log("[User Cart Obj : => ", this.props.userCart);
-
     if (
       this.props.userLoading ||
       this.props.userOrdersLoading ||
@@ -100,14 +99,28 @@ class Cart extends Component {
               <table className="table table-hover text-left">
                 <thead>
                   <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col" className="text-center">
+                    <th scope="col" style={{ color: "#fe687b" }}>
+                      Product
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
                       Quantity
                     </th>
-                    <th scope="col" className="text-center">
+                    <th
+                      scope="col"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
                       Sub Total
                     </th>
-                    <th scope="col" className="text-center">
+                    <th
+                      scope="col"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
                       Operations
                     </th>
                   </tr>
@@ -115,14 +128,16 @@ class Cart extends Component {
                 <tbody>
                   {cartProducts}
                   <tr>
-                    <th scope="row">Total Price</th>
+                    <th scope="row" style={{ color: "#fe687b" }}>
+                      Total Price
+                    </th>
                     <td> </td>
-                    <th scope="row" className="text-center">
-                      {!!this.props.userOrderStatusCart.total_price && (
-                        <span>
-                          {this.props.userOrderStatusCart.total_price}
-                        </span>
-                      )}{" "}
+                    <th
+                      scope="row"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
+                      <span>{this.props.userOrderStatusCart.total_price}</span>{" "}
                       SR
                     </th>
 
@@ -162,8 +177,6 @@ const mapStateToProps = state => {
 
     userCart: state.ordersReducer.userCart,
     userCartLoading: state.ordersReducer.userCartLoading
-
-    // profile: state.profileReducer.profile,
   };
 };
 
@@ -173,9 +186,9 @@ const mapDispatchToProps = dispatch => {
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     createOrder: order => dispatch(actionCreators.createOrder(order)),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
-    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID))
-    // deleteCartProduct: orderID =>
-    //   dispatch(actionCreators.deleteCartProduct(orderID))
+    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
+    deleteCartProduct: orderProductID =>
+      dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 
