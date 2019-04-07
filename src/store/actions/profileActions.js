@@ -70,10 +70,11 @@ export const logout = () => {
   return setCurrentUser();
 };
 
-export const fetchProfileDetail = profileID => {
+export const fetchProfileDetail = () => {
   return async dispatch => {
     try {
-      const res = await instance.post(`profile/detail/${profileID}/`);
+
+      const res = await instance.get("profile/detail/");
       const userprofile = res.data;
       dispatch({
         type: actionTypes.FETCH_PROFILE_DETAIL,
