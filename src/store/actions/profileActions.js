@@ -73,9 +73,10 @@ export const logout = () => {
 export const fetchProfileDetail = () => {
   return async dispatch => {
     try {
-
       const res = await instance.get("profile/detail/");
+
       const userprofile = res.data;
+      console.log("TCL: fetchProfileDetail -> userprofile", userprofile);
       dispatch({
         type: actionTypes.FETCH_PROFILE_DETAIL,
         payload: userprofile

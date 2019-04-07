@@ -14,7 +14,6 @@ import {
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
-
 class Navbar extends Component {
   render() {
     return (
@@ -35,10 +34,9 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
-         
                   <a
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    href=" "
                     id="navbarDropdownMenuLink"
                     role="button"
                     data-toggle="dropdown"
@@ -51,26 +49,28 @@ class Navbar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdownMenuLink"
                   >
-                    <a
-                      className="dropdown-item"
-                      href="#"
-                      style={{ color: "gray" }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faUser}
+                    <Link to="/profile">
+                      <a
+                        className="dropdown-item"
+                        href=" "
                         style={{ color: "gray" }}
-                      />{" "}
-                      My Profile
-                    </a>
+                      >
+                        <FontAwesomeIcon
+                          icon={faUser}
+                          style={{ color: "gray" }}
+                        />{" "}
+                        My Profile
+                      </a>
+                    </Link>
                     <a
                       className="dropdown-item"
-                      href="#"
+                      href=" "
                       style={{ color: "gray" }}
+                      onClick={() => this.props.logout()}
                     >
                       <FontAwesomeIcon
                         icon={faPowerOff}
                         style={{ color: "gray" }}
-                        onClick={() => this.props.logout()}
                       />{" "}
                       Logout {this.props.user.username}
                     </a>
@@ -94,7 +94,6 @@ class Navbar extends Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   user: state.profileReducer.user
 });
@@ -107,4 +106,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Navbar);
-

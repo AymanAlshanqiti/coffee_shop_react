@@ -31,11 +31,7 @@ class ProductDetail extends Component {
     };
     console.log("[Product detail state]  =>", this.state);
 
-    if (
-      loading ||
-      this.props.userLoading ||
-      this.props.userOrderStatusCartLoading
-    ) {
+    if (loading) {
       return <Loading />;
     } else {
       return (
