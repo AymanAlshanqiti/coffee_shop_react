@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,9 +19,7 @@ class Navbar extends Component {
             />
             <span> Hug In Mug</span>
           </Link>
-          <Link to="/cart" className="">
-            Cart
-          </Link>
+          {this.props.user && <Link to="/cart">Cart</Link>}
         </div>
         <div className="col-3 align-right">
           <div className="collapse navbar-collapse " id="navbarNavDropdown">
@@ -34,8 +33,7 @@ class Navbar extends Component {
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                > */}
-                {/* </a> */}
+                /> */}
                 <AuthButton />
                 <div
                   className="dropdown-menu"
@@ -70,4 +68,10 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    user: state.profileReducer.user
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

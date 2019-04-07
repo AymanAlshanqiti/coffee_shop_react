@@ -25,14 +25,8 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    // await this.props.login();
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
-
-    if (this.props.user) {
-      await this.props.getUserOrders();
-      this.getCartStatusOrder();
-    }
   };
 
   getCartStatusOrder = () => {
@@ -55,14 +49,15 @@ class App extends Component {
         </div>
         <div className="container-fluid my-4">
           <Switch>
-            {/* {this.props.user && (
-              <Route exact path="/Profile" component={Profile} />
-            )} */}
-            <Route exact path="/Profile" component={Profile} />
 
+            {/* {this.props.user &&
+              ( */}
+            <Route exact path="/Profile" component={Profile} />,
+            <Route exact path="/cart" component={Cart} />
+            {/* )} */}
+      
             <Route exact path="/products" component={ProductList} />
             <Route exact path="/(login|signup)" component={RegistrationForm} />
-            <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />
           </Switch>
@@ -75,18 +70,26 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.profileReducer.user,
-    userOrders: state.profileReducer.userOrders
+    userLoading: state.profileReducer.userLoading,
+    
+    userOrders: state.profileReducer.userOrders,
+    userOrdersLoading: state.profileReducer.userOrdersLoading,
+    
+    userOrderStatusCart: state.profileReducer.userOrderStatusCart,
+    userOrderStatusCartLoading: state.profileReducer.userOrderStatusCartLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: () => dispatch(actionCreators.login()),
-    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
     getAllProducts: () => dispatch(actionCreators.getAllProducts()),
+    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
+    createOrder: order => dispatch(actionCreators.createOrder(order)),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
-    createOrder: order => dispatch(actionCreators.createOrder(order))
+    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
+    deleteCartProduct: orderProductID =>
+      dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 

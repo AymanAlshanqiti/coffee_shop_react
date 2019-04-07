@@ -11,112 +11,183 @@ import {
   faShoppingBasket,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
+import Loading from "../Loading";
 
 class Cart extends Component {
-  state = {
-    cartProducts: null
-  };
+  // componentDidMount = async () => {
+  //   console.log("Cart.js", this.props.userOrderStatusCart);
+  //   if (this.props.userOrderStatusCart) {
+  //     await this.setState({
+  //       userOrderStatusCart: this.props.userOrderStatusCart
+  //     });
+  //     await this.props.getUserCart(this.props.userOrderStatusCart.id);
+  //     await this.setState({ cartProducts: this.props.userCart });
+  //   }
+  // };
 
   componentDidMount = async () => {
+    await this.props.checkForExpiredToken();
+    if (this.props.user) {
+      await this.props.getUserOrders();
+      this.getCartStatusOrder();
+    }
     if (this.props.userOrderStatusCart) {
       await this.props.getUserCart(this.props.userOrderStatusCart.id);
-      await this.setState({ cartProducts: this.props.userCart });
     }
   };
 
-  handleDeleteProduct = async productID => {
-    alert(`hiiiii ${productID}`);
-    await this.props.deleteCartProduct(productID);
+  getCartStatusOrder = () => {
+    const cartStatusOrder = this.props.userOrders.find(order => {
+      return order.status === 1;
+    });
+
+    if (cartStatusOrder) {
+      this.props.getUserCartOrder(cartStatusOrder);
+    } else {
+      this.props.createOrder(this.state);
+    }
+  };
+
+  handleDeleteProduct = async orderProductID => {
+    await this.props.deleteCartProduct(orderProductID);
+    await this.props.getUserCart(this.props.userOrderStatusCart.id);
   };
 
   render() {
-    console.log("[CartOrderObj] => ", this.state);
-    let cartProducts = null;
-    if (this.state.cartProducts) {
-      cartProducts = this.state.cartProducts.map(product => (
-        <tr>
-          <th scope="row">{product.product.name}</th>
-          <td>{product.quantity}</td>
-          <td>
-            <span>{product.total_price}</span> SR
-          </td>
-          <td className="text-center">
-            <button
-              className="btn btn-danger"
-              onClick={() => this.handleDeleteProduct(product.id)}
-            >
-              <FontAwesomeIcon icon={faTrash} style={{ color: "#FFF" }} />{" "}
-              Remove
-            </button>
-          </td>
-        </tr>
-      ));
-    }
+    if (
+      this.props.userLoading ||
+      this.props.userOrdersLoading ||
+      this.props.userOrderStatusCartLoading ||
+      this.props.userCartLoading
+    ) {
+      return <Loading />;
+    } else {
+      let cartProducts = null;
+      if (this.props.userCart) {
+        cartProducts = this.props.userCart.order_products.map(product => (
+          <tr>
+            <th scope="row">{product.product.name}</th>
+            <td className="text-center">{product.quantity}</td>
+            <td className="text-center">
+              <span>{product.total_price}</span> SR
+            </td>
+            <td className="text-center">
+              <button
+                className="btn btn-danger"
+                onClick={() => this.handleDeleteProduct(product.id)}
+              >
+                <FontAwesomeIcon icon={faTrash} style={{ color: "#FFF" }} />{" "}
+                Remove
+              </button>
+            </td>
+          </tr>
+        ));
+      }
 
-    return (
-      <div className="row justify-content-md-center">
-        <div className="col-8">
-          <div className="col-12 mx-4 my-4 text-center">
-            <h2 style={{ color: "#fe687b" }}>
-              <FontAwesomeIcon
-                icon={faShoppingBasket}
-                style={{ color: "#fe687b" }}
-              />{" "}
-              My Cart
-            </h2>
-            <br />
-            <table className="table table-hover text-left">
-              <thead>
-                <tr>
-                  <th scope="col">Product</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Total Price</th>
-                  <th scope="col">Operations</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cartProducts}
-                <tr>
-                  <th scope="row">Total Price</th>
-                  <td />
-                  <th scope="row">
-                    <span>0.00</span> SR
-                  </th>
-
-                  <td className="text-center">
-                    <button
-                      className="btn btn-danger"
-                      style={{ color: "#FFF", backgroundColor: "#fe687b" }}
+      return (
+        <div className="row justify-content-md-center">
+          <div className="col-8">
+            <div className="col-12 mx-4 my-4 text-center">
+              <h2 style={{ color: "#fe687b" }}>
+                <FontAwesomeIcon
+                  icon={faShoppingBasket}
+                  style={{ color: "#fe687b" }}
+                />{" "}
+                My Cart
+              </h2>
+              <br />
+              <table className="table table-hover text-left">
+                <thead>
+                  <tr>
+                    <th scope="col" style={{ color: "#fe687b" }}>
+                      Product
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
                     >
-                      <FontAwesomeIcon
-                        icon={faMoneyBill}
-                        style={{ color: "#FFF" }}
-                      />{" "}
-                      Checkout
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      Quantity
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
+                      Sub Total
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
+                      Operations
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartProducts}
+                  <tr>
+                    <th scope="row" style={{ color: "#fe687b" }}>
+                      Total Price
+                    </th>
+                    <td> </td>
+                    <th
+                      scope="row"
+                      className="text-center"
+                      style={{ color: "#fe687b" }}
+                    >
+                      <span>{this.props.userCart.total_price}</span> SR
+                    </th>
+
+                    <td className="text-center">
+                      <button
+                        className="btn btn-danger"
+                        style={{ color: "#FFF", backgroundColor: "#fe687b" }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faMoneyBill}
+                          style={{ color: "#FFF" }}
+                        />{" "}
+                        Checkout
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
+    user: state.profileReducer.user,
+    userLoading: state.profileReducer.userLoading,
+
+    userOrders: state.profileReducer.userOrders,
+    userOrdersLoading: state.profileReducer.userOrdersLoading,
+
+    userOrderStatusCart: state.profileReducer.userOrderStatusCart,
+    userOrderStatusCartLoading: state.profileReducer.userOrderStatusCartLoading,
+
     userCart: state.ordersReducer.userCart,
-    userOrderStatusCart: state.profileReducer.userOrderStatusCart
+    userCartLoading: state.ordersReducer.userCartLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
+    getUserOrders: () => dispatch(actionCreators.getUserOrders()),
+    createOrder: order => dispatch(actionCreators.createOrder(order)),
+    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
     getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
-    deleteCartProduct: orderID =>
-      dispatch(actionCreators.deleteCartProduct(orderID))
+    deleteCartProduct: orderProductID =>
+      dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 

@@ -20,11 +20,10 @@ export const getUserCart = orderID => {
   };
 };
 
-export const deleteCartProduct = orderID => {
+export const deleteCartProduct = orderProductID => {
   return async dispatch => {
     try {
-      const res = await instance.delete(`/orderproduct/delete/${orderID}/`);
-      console.log("jjjjjjjjjjjjjjjjjjjjjooo", res.data);
+      await instance.delete(`/orderproduct/delete/${orderProductID}/`);
     } catch (error) {
       console.error(error);
     }

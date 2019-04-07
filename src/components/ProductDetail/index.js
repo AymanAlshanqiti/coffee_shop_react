@@ -14,12 +14,9 @@ class ProductDetail extends Component {
     product: null,
     quantity: 1
   };
+
   componentDidMount = async () => {
     await this.props.getProduct(this.props.match.params.productID);
-    await this.setState({
-      order: this.props.userOrderStatusCart.id,
-      product: this.props.productInfo.id
-    });
   };
 
   quantityChange(e) {
@@ -34,7 +31,11 @@ class ProductDetail extends Component {
     };
     console.log("[Product detail state]  =>", this.state);
 
-    if (loading) {
+    if (
+      loading ||
+      this.props.userLoading ||
+      this.props.userOrderStatusCartLoading
+    ) {
       return <Loading />;
     } else {
       return (
@@ -131,10 +132,14 @@ class ProductDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.productsReducer.productInfoLoading,
     productInfo: state.productsReducer.productInfo,
+    loading: state.productsReducer.productInfoLoading,
+
     user: state.profileReducer.user,
-    userOrderStatusCart: state.profileReducer.userOrderStatusCart
+    userLoading: state.profileReducer.userLoading,
+
+    userOrderStatusCart: state.profileReducer.userOrderStatusCart,
+    userOrderStatusCartLoading: state.profileReducer.userOrderStatusCartLoading
   };
 };
 
