@@ -35,11 +35,7 @@ class RegistrationForm extends Component {
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
-          <h5 className="card-title mb-4">
-            {/* {type === "login"
-              ? "Login to enjoy our hugs"
-              : "Register an account"} */}
-          </h5>
+          <h5 className="card-title mb-4" />
           <form onSubmit={event => this.submitHandler(event, type)}>
             <div className="form-group">
               <input
@@ -87,20 +83,21 @@ class RegistrationForm extends Component {
               />
             </div>
             <input
-              className="btn btn-primary"
+              className="btn btn-danger btn-block"
+              style={{ color: "#FFF", backgroundColor: "#fe687b" }}
               type="submit"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
           </form>
         </div>
-        <div className="card-footer">
+        <div className="card-footer text-center">
           <Link
             to={type === "login" ? "/signup" : "/login"}
             className="btn btn-small btn-link"
           >
             {type === "login"
-              ? "register an account"
-              : "login with an existing account"}
+              ? "Register an account"
+              : "Login with an existing account"}
           </Link>
         </div>
       </div>
