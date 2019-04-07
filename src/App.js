@@ -15,11 +15,15 @@ import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
+import RegistrationForm from "./components/profiles/RegistrationForm";
 
 class App extends Component {
   componentDidMount = async () => {
     await this.props.getAllProducts();
   };
+  componentDidMount() {
+    this.props.checkForExpiredToken();
+  }
 
   render() {
     return (
@@ -31,6 +35,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/Profile" component={Profile} />
             <Route exact path="/products" component={ProductList} />
+            <Route exact path="/(login|signup)" component={RegistrationForm} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Redirect to="/products" />
           </Switch>
@@ -42,8 +47,8 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllProducts: () => dispatch(actionCreators.getAllProducts())
-    // checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
+    getAllProducts: () => dispatch(actionCreators.getAllProducts()),
+    checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
   };
 };
 

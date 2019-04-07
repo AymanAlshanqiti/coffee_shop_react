@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
-
+import AuthButton from "./AuthButton";
 class Navbar extends Component {
   render() {
     return (
@@ -22,7 +22,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse " id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
-                <a
+                {/* <a
                   className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdownMenuLink"
@@ -30,9 +30,9 @@ class Navbar extends Component {
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                >
-                  Ayman Alshanqiti
-                </a>
+                > */}
+                {/* </a> */}
+                <AuthButton />
                 <div
                   className="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"
