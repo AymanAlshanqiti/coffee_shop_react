@@ -10,7 +10,8 @@ export {
   getUserCartOrder,
   createOrder,
   addProductToCart,
-  orderCheckout
+  orderCheckout,
+  fetchProfileDetail
 } from "./profileActions";
 
 export {
