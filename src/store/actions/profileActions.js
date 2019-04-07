@@ -45,10 +45,8 @@ const setCurrentUser = user => ({
 export const login = (userData, history) => {
   return async dispatch => {
     try {
-      // let response = await instance.post("login/", userData);
-      // let user = response.data;
-      const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImF5bWFuIiwiZXhwIjoxNTU0NTkxNDM2LCJlbWFpbCI6IiJ9.IYYwOlND8a-wzk3lP1njiHbWdTugxD_DgQ3LalXDaM0";
+      const response = await instance.post("login/", userData);
+      const token = response.data.token
       let decodedUser = jwt_decode(token);
 
       setAuthToken(token);
