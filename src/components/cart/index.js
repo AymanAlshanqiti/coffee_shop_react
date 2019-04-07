@@ -14,11 +14,15 @@ import {
 
 class Cart extends Component {
   state = {
+    userOrderStatusCart: null,
     cartProducts: null
   };
 
   componentDidMount = async () => {
     if (this.props.userOrderStatusCart) {
+      await this.setState({
+        userOrderStatusCart: this.props.userOrderStatusCart
+      });
       await this.props.getUserCart(this.props.userOrderStatusCart.id);
       await this.setState({ cartProducts: this.props.userCart });
     }
@@ -30,14 +34,16 @@ class Cart extends Component {
   };
 
   render() {
-    console.log("[CartOrderObj] => ", this.state);
+    console.log("[CartOrderObj] => ", this.props.userOrderStatusCart);
+    console.log("[CartProducts] => ", this.props.userCart);
+
     let cartProducts = null;
     if (this.state.cartProducts) {
       cartProducts = this.state.cartProducts.map(product => (
         <tr>
           <th scope="row">{product.product.name}</th>
-          <td>{product.quantity}</td>
-          <td>
+          <td className="text-center">{product.quantity}</td>
+          <td className="text-center">
             <span>{product.total_price}</span> SR
           </td>
           <td className="text-center">
@@ -69,18 +75,27 @@ class Cart extends Component {
               <thead>
                 <tr>
                   <th scope="col">Product</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Total Price</th>
-                  <th scope="col">Operations</th>
+                  <th scope="col" className="text-center">
+                    Quantity
+                  </th>
+                  <th scope="col" className="text-center">
+                    Sub Total
+                  </th>
+                  <th scope="col" className="text-center">
+                    Operations
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {cartProducts}
                 <tr>
                   <th scope="row">Total Price</th>
-                  <td />
-                  <th scope="row">
-                    <span>0.00</span> SR
+                  <td> </td>
+                  <th scope="row" className="text-center">
+                    {!!this.props.userOrderStatusCart.total_price && (
+                      <span>{this.props.userOrderStatusCart.total_price}</span>
+                    )}{" "}
+                    SR
                   </th>
 
                   <td className="text-center">

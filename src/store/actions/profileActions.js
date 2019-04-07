@@ -14,9 +14,6 @@ export const checkForExpiredToken = () => {
       const currentTime = Date.now() / 1000;
 
       const user = jwt_decode(token);
-
-      //   console.log((user.exp - currentTime) / 60);
-
       if (user.exp >= currentTime) {
         setAuthToken(token);
         dispatch(setCurrentUser(user));
@@ -46,12 +43,12 @@ export const login = (userData, history) => {
   return async dispatch => {
     try {
       const response = await instance.post("login/", userData);
-      const token = response.data.token
+      const token = response.data.token;
       let decodedUser = jwt_decode(token);
 
       setAuthToken(token);
       dispatch(setCurrentUser(decodedUser));
-      history.push("Profile");
+      history.push("products");
     } catch (error) {
       console.error(error);
     }
