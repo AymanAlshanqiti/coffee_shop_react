@@ -20,12 +20,13 @@ class ProductsCards extends Component {
             <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
               {product.price} SR
             </p>
-            <Link
-              to={`/products/${product.id}`}
-              className="btn btn-light btn-block"
-              style={{ backgroundColor: "#fe687b", color: "#fff" }}
-            >
-              Detail
+            <Link to={`/products/${product.id}`}>
+              <button
+                className="btn btn-danger btn-block"
+                style={{ color: "#FFF", backgroundColor: "#fe687b" }}
+              >
+                Detail
+              </button>
             </Link>
           </div>
         </div>

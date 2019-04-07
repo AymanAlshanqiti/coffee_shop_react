@@ -7,11 +7,11 @@ import { connect } from "react-redux";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import AuthButton from "./AuthButton";
 import {
-  faSignOutAlt,
+  faIdCard,
   faSignInAlt,
-  faUserPlus
+  faUserPlus,
+  faShoppingBasket
 } from "@fortawesome/free-solid-svg-icons";
 
 class Navbar extends Component {
@@ -27,11 +27,22 @@ class Navbar extends Component {
             />
             <span> Hug In Mug</span>
           </Link>
-          {this.props.user && <Link to="/cart">Cart</Link>}
         </div>
-        <div className="col-3 align-right">
+
+        <div className="col-4 align-right">
           {this.props.user ? (
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
+              {this.props.user && (
+                <Link to="/cart">
+                  <FontAwesomeIcon
+                    icon={faShoppingBasket}
+                    style={{
+                      color: "#fe687b",
+                      fontSize: 25
+                    }}
+                  />{" "}
+                </Link>
+              )}
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <a
@@ -43,6 +54,12 @@ class Navbar extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      style={{ color: "gray" }}
+                    />{" "}
+                    <span>Welcome </span>
                     {this.props.user.username}{" "}
                   </a>
                   <div
@@ -56,7 +73,7 @@ class Navbar extends Component {
                         style={{ color: "gray" }}
                       >
                         <FontAwesomeIcon
-                          icon={faUser}
+                          icon={faIdCard}
                           style={{ color: "gray" }}
                         />{" "}
                         My Profile
@@ -80,11 +97,11 @@ class Navbar extends Component {
             </div>
           ) : (
             <div>
-              <Link to="/login">
-                <FontAwesomeIcon icon={faSignInAlt} /> Login
-              </Link>
-              <Link to="/signup">
+              <Link to="/signup" className="btn btn-outline-secondary mx-3">
                 <FontAwesomeIcon icon={faUserPlus} /> Signup
+              </Link>
+              <Link to="/login" className="btn btn-info">
+                <FontAwesomeIcon icon={faSignInAlt} /> Login
               </Link>
             </div>
           )}

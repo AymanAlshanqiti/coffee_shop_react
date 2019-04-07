@@ -93,7 +93,10 @@ class Profile extends Component {
                 @{profile && profile.customer.username}
               </h5>
               <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
-                {profile && profile.customer.first_name}
+                {profile &&
+                  `${profile.customer.first_name} ${
+                    profile.customer.last_name
+                  }`}
               </p>
               <div className="row justify-content-md-center my-5">
                 <br />
