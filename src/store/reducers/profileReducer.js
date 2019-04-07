@@ -2,9 +2,15 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   user: null,
-  profile: null,
+  userLoading: true,
+
   userOrders: [],
-  userOrderStatusCart: null
+  userOrdersLoading: true,
+
+  userOrderStatusCart: null,
+  userOrderStatusCartLoading: true,
+
+  profile: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -18,7 +24,8 @@ const profileReducer = (state = initialState, action) => {
     case actionTypes.SET_CURRENT_USER:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        userLoading: false
       };
     case actionTypes.FETCH_PROFILE_DETAIL:
       return {
@@ -34,13 +41,15 @@ const profileReducer = (state = initialState, action) => {
     case actionTypes.GET_USER_ORDERS:
       return {
         ...state,
-        userOrders: action.payload
+        userOrders: action.payload,
+        userOrdersLoading: false
       };
 
     case actionTypes.GET_USER_CART_ORDER:
       return {
         ...state,
-        userOrderStatusCart: action.payload
+        userOrderStatusCart: action.payload,
+        userOrderStatusCartLoading: false
       };
 
     case actionTypes.CREATE_ORDER:

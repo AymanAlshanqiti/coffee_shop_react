@@ -1,19 +1,17 @@
 import * as actionTypes from "../actions/types";
 
 const initialState = {
-  userCart: null
+  userCart: null,
+  userCartLoading: true
 };
 
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER_CART:
-      console.log(
-        "TCL: orderID => from GET_USER_CART reducer =>",
-        action.payload.order_products
-      );
-
       return {
-        userCart: action.payload.order_products
+        ...state,
+        userCart: action.payload,
+        userCartLoading: false
       };
     default:
       return state;

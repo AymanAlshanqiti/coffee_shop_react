@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import * as actionCreators from "../../store/actions";
 import { connect } from "react-redux";
 
@@ -12,6 +13,8 @@ import {
   faSignInAlt,
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
+
+
 class Navbar extends Component {
   render() {
     return (
@@ -25,15 +28,14 @@ class Navbar extends Component {
             />
             <span> Hug In Mug</span>
           </Link>
-          <Link to="/cart" className="">
-            Cart
-          </Link>
+          {this.props.user && <Link to="/cart">Cart</Link>}
         </div>
         <div className="col-3 align-right">
           {this.props.user ? (
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
+         
                   <a
                     className="nav-link dropdown-toggle"
                     href="#"
@@ -91,24 +93,18 @@ class Navbar extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(actionCreators.logout())
-});
+
+
 const mapStateToProps = state => ({
   user: state.profileReducer.user
 });
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(actionCreators.logout())
+});
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Navbar);
-{
-  /* <li key="loginButton" className="nav-item">
-          <Link to="/login" className="nav-link">
-            <FontAwesomeIcon icon={faSignInAlt} /> Login
-          </Link>
-        </li>,
-        <li key="signupButton" className="nav-item">
-          <Link to="/signup" className="nav-link">
-            <FontAwesomeIcon icon={faUserPlus} /> Signup
-          </Link> */
-}
+
