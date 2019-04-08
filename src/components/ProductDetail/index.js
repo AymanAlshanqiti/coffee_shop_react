@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
 import { Link } from "react-router-dom";
 
 // Components
 import Loading from "../Loading";
-
-import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions";
 
 class ProductDetail extends Component {
   state = {

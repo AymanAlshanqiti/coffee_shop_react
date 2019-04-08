@@ -11,15 +11,15 @@ import * as actionCreators from "./store/actions";
 import { connect } from "react-redux";
 
 // Components
-import ProductList from "./components/ProductList";
-import ProductDetail from "./components/ProductDetail";
-import Navbar from "../src/components/navbar";
-import Profile from "../src/components/profiles";
-import PreviousOrders from "../src/components/profiles/previousOrders";
+import ProductList from "./Components/ProductList";
+import ProductDetail from "./Components/ProductDetail";
+import Navbar from "./Components/Navbar";
+import Profile from "./Components/Profiles";
+import PreviousOrders from "./Components/Profiles/PreviousOrders";
 
-import RegistrationForm from "./components/profiles/RegistrationForm";
-import Cart from "../src/components/cart";
-import LoginForm from "./components/profiles/LoginForm";
+import RegistrationForm from "./Components/Profiles/RegistrationForm";
+import Cart from "./Components/Cart";
+import LoginForm from "./Components/Profiles/LoginForm";
 
 class App extends Component {
   state = {

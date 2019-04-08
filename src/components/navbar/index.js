@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-import * as actionCreators from "../../store/actions";
 import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
+import { Link } from "react-router-dom";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

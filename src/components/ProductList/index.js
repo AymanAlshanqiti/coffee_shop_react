@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 // Components
 import Loading from "../Loading";
-import ProductsCards from "../ProductList/productsCards";
+import ProductsCards from "./ProductCard";
 
 class ProductList extends Component {
   render() {
