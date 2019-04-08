@@ -5,7 +5,7 @@ class ProductsCards extends Component {
   render() {
     const product = this.props.product;
     return (
-      <div className="col-2 ">
+      <div className="col-3 ">
         <div className="card my-4 align-items-center">
           <img
             src={product.image}

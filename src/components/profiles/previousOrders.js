@@ -109,17 +109,13 @@ class PreviousOrders extends Component {
         }
       }
       return (
-        <div className="row my-4">
-          <div className="col-3 mx-4">
-            <div
-              className="card my-4 align-items-center"
-              style={{ height: 500 }}
-            >
+        <div className="row">
+          <div className="col-3">
+            <div className="card align-items-center" style={{ height: "100%" }}>
               <img
                 src={profile && this.props.profile.image}
-                className="card-img-top mt-4"
+                className="card-img-top"
                 alt="user_pic"
-                style={{ width: 200, height: 200 }}
               />
               <div className="card-body text-center">
                 <h5 className="card-title">
@@ -146,9 +142,12 @@ class PreviousOrders extends Component {
               </div>
             </div>
           </div>
-          <div className="col-8 mx-4 my-4 text-center">
-            <div className="row">
-              <div className="col-3 text-left">
+          <div
+            className="col-8 mr-1 text-center"
+            style={{ border: "1px solid #e1e1e1", borderRadius: 8 }}
+          >
+            <div className="row mt-4">
+              <div className="col-3 text-center">
                 <Link to="/profile">
                   <h4 style={{ color: "#c7c7c7" }}>
                     <FontAwesomeIcon
@@ -173,7 +172,7 @@ class PreviousOrders extends Component {
             <br />
 
             <div className="row justify-content-md-center">
-              <div className="col-8">
+              <div className="col-10">
                 <div className="col-12 mx-4 my-4 text-center">
                   {" "}
                   <table className="table table-hover text-left">

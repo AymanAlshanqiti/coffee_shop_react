@@ -104,14 +104,13 @@ class Profile extends Component {
       }
     }
     return (
-      <div className="row my-4">
-        <div className="col-3 mx-4">
-          <div className="card my-4 align-items-center" style={{ height: 500 }}>
+      <div className="row">
+        <div className="col-3 ">
+          <div className="card align-items-center" style={{ height: "100%" }}>
             <img
               src={profile && this.props.profile.image}
-              className="card-img-top mt-4"
+              className="card-img-top "
               alt="user_pic"
-              style={{ width: 200, height: 200 }}
             />
             <div className="card-body text-center">
               <h5 className="card-title">
@@ -133,15 +132,18 @@ class Profile extends Component {
           </div>
         </div>
 
-        <div className="col-8 mx-4 my-4 text-center">
-          <h2 style={{ color: "#fe687b" }}>
+        <div
+          className="col-8 mr-1 text-center"
+          style={{ border: "1px solid #e1e1e1", borderRadius: 8 }}
+        >
+          <h2 style={{ color: "#fe687b" }} className="mt-4">
             <FontAwesomeIcon icon={faCoffee} style={{ color: "#fe687b" }} /> My
             Previous orders
           </h2>
           <br />
 
           <div className="row justify-content-md-center">
-            <div className="col-8">
+            <div className="col-10">
               <div className="col-12 mx-4 my-4 text-center">
                 {" "}
                 <table className="table table-hover text-left">
