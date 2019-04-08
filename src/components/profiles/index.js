@@ -41,7 +41,6 @@ const formatTimeS = ts => {
   let day = date.getDate();
   let monthIndex = date.getMonth();
   let year = date.getFullYear();
-  // Where do we use it ? hey ayman!! we use it here!
   let datestr = day + " " + monthNames[monthIndex] + " " + year;
   let time = formatAMPM(date);
 
@@ -50,10 +49,6 @@ const formatTimeS = ts => {
 
 class Profile extends Component {
   async componentDidMount() {
-    let user = this.props.user;
-    console.log("TCL: Profile -> componentDidMount -> user", user);
-    // TODO: check if needed even if the user
-    // got to this page by <Link to='/profile'>
     await this.props.getUserOrders();
     await this.props.getProfileDetail();
   }
@@ -104,15 +99,22 @@ class Profile extends Component {
       }
     }
     return (
-      <div className="row my-4">
-        <div className="col-3 mx-4">
-          <div className="card my-4 align-items-center" style={{ height: 500 }}>
-            <img
-              src={profile && this.props.profile.image}
-              className="card-img-top mt-4"
-              alt="user_pic"
-              style={{ width: 200, height: 200 }}
-            />
+      <div className="row">
+        <div className="col-3 ">
+          <div className="card align-items-center" style={{ height: "100%" }}>
+            {profile && !this.props.profile.image ? (
+              <img
+                src={require("../../assets/images/cafe.png")}
+                className="card-img-top "
+                alt="user_pic"
+              />
+            ) : (
+              <img
+                src={profile && this.props.profile.image}
+                className="card-img-top "
+                alt="user_pic"
+              />
+            )}
             <div className="card-body text-center">
               <h5 className="card-title">
                 @{profile && profile.customer.username}
@@ -133,15 +135,18 @@ class Profile extends Component {
           </div>
         </div>
 
-        <div className="col-8 mx-4 my-4 text-center">
-          <h2 style={{ color: "#fe687b" }}>
+        <div
+          className="col-8 mr-1 text-center"
+          style={{ border: "1px solid #e1e1e1", borderRadius: 8 }}
+        >
+          <h2 style={{ color: "#fe687b" }} className="mt-4">
             <FontAwesomeIcon icon={faCoffee} style={{ color: "#fe687b" }} /> My
             Previous orders
           </h2>
           <br />
 
           <div className="row justify-content-md-center">
-            <div className="col-8">
+            <div className="col-10">
               <div className="col-12 mx-4 my-4 text-center">
                 {" "}
                 <table className="table table-hover text-left">

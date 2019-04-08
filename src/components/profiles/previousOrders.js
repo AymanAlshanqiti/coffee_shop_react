@@ -13,50 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../Loading";
 
-const formatAMPM = date => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let ampm = hours >= 12 ? "pm" : "am";
-
-  hours = hours % 12 || 12; // the hour '0' should be '12'
-
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-
-  return hours + ":" + minutes + " " + ampm;
-};
-
-const formatTimeS = ts => {
-  let date = new Date(ts);
-  let monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-
-  let day = date.getDate();
-  let monthIndex = date.getMonth();
-  let year = date.getFullYear();
-  // Where do we use it ? hey ayman!! we use it here!
-  let datestr = day + " " + monthNames[monthIndex] + " " + year;
-  let time = formatAMPM(date);
-
-  return datestr + " | " + time;
-};
-
 class PreviousOrders extends Component {
   async componentDidMount() {
-    let user = this.props.user;
-    // TODO: check if needed even if the user
-    // got to this page by <Link to='/profile'>
     this.props.getProfileDetail();
     await this.props.getOrderDetail(this.props.match.params.orderID);
   }
@@ -100,7 +58,7 @@ class PreviousOrders extends Component {
                     <span>{productObj.quantity}</span>
                   </td>
                   <td className="text-center">
-                    <span>{productObj.total_price}</span>SR
+                    <span>{productObj.total_price}</span> SR
                   </td>
                 </tr>
               );
@@ -109,18 +67,22 @@ class PreviousOrders extends Component {
         }
       }
       return (
-        <div className="row my-4">
-          <div className="col-3 mx-4">
-            <div
-              className="card my-4 align-items-center"
-              style={{ height: 500 }}
-            >
-              <img
-                src={profile && this.props.profile.image}
-                className="card-img-top mt-4"
-                alt="user_pic"
-                style={{ width: 200, height: 200 }}
-              />
+        <div className="row">
+          <div className="col-3">
+            <div className="card align-items-center" style={{ height: "100%" }}>
+              {profile && !this.props.profile.image ? (
+                <img
+                  src={require("../../assets/images/cafe.png")}
+                  className="card-img-top "
+                  alt="user_pic"
+                />
+              ) : (
+                <img
+                  src={profile && this.props.profile.image}
+                  className="card-img-top "
+                  alt="user_pic"
+                />
+              )}
               <div className="card-body text-center">
                 <h5 className="card-title">
                   @{profile && profile.customer.username}
@@ -146,9 +108,12 @@ class PreviousOrders extends Component {
               </div>
             </div>
           </div>
-          <div className="col-8 mx-4 my-4 text-center">
-            <div className="row">
-              <div className="col-3 text-left">
+          <div
+            className="col-8 mr-1 text-center"
+            style={{ border: "1px solid #e1e1e1", borderRadius: 8 }}
+          >
+            <div className="row mt-4">
+              <div className="col-3 text-center">
                 <Link to="/profile">
                   <h4 style={{ color: "#c7c7c7" }}>
                     <FontAwesomeIcon
@@ -173,7 +138,7 @@ class PreviousOrders extends Component {
             <br />
 
             <div className="row justify-content-md-center">
-              <div className="col-8">
+              <div className="col-10">
                 <div className="col-12 mx-4 my-4 text-center">
                   {" "}
                   <table className="table table-hover text-left">

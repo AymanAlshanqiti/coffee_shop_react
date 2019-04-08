@@ -11,15 +11,15 @@ import * as actionCreators from "./store/actions";
 import { connect } from "react-redux";
 
 // Components
-import ProductList from "./components/ProductList";
-import ProductDetail from "./components/ProductDetail";
-import Navbar from "../src/components/navbar";
-import Profile from "../src/components/profiles";
-import PreviousOrders from "../src/components/profiles/previousOrders";
+import ProductList from "./Components/ProductList";
+import ProductDetail from "./Components/ProductDetail";
+import Navbar from "./Components/Navbar";
+import Profile from "./Components/Profiles";
+import PreviousOrders from "./Components/Profiles/PreviousOrders";
 
-import RegistrationForm from "./components/profiles/RegistrationForm";
-import Cart from "../src/components/cart";
-import LoginForm from "./components/profiles/LoginForm";
+import RegistrationForm from "./Components/Profiles/RegistrationForm";
+import Cart from "./Components/Cart";
+import LoginForm from "./Components/Profiles/LoginForm";
 
 class App extends Component {
   state = {
@@ -57,14 +57,19 @@ class App extends Component {
         </div>
         <div className="container-fluid my-4">
           <Switch>
-            <Route exact path="/profile" component={Profile} />,
-            <Route
-              exact
-              path="/orders/detail/:orderID"
-              component={PreviousOrders}
-            />
-            ,
-            <Route exact path="/cart" component={Cart} />
+            {this.props.user && (
+              <Route exact path="/profile" component={Profile} />
+            )}
+
+            {this.props.user && (
+              <Route
+                exact
+                path="/orders/detail/:orderID"
+                component={PreviousOrders}
+              />
+            )}
+            {this.props.user && <Route exact path="/cart" component={Cart} />}
+
             <Route exact path="/products" component={ProductList} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Route exact path="/signup" component={RegistrationForm} />
@@ -96,10 +101,10 @@ const mapDispatchToProps = dispatch => {
     checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     createOrder: order => dispatch(actionCreators.createOrder(order)),
-    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
-    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
-    deleteCartProduct: orderProductID =>
-      dispatch(actionCreators.deleteCartProduct(orderProductID))
+    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order))
+    // getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
+    // deleteCartProduct: orderProductID =>
+    //   dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-// Actions
-import * as actionCreators from "../../store/actions";
 import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
+import { Link } from "react-router-dom";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +10,8 @@ import {
   faShoppingBasket,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
+
+// Components
 import Loading from "../Loading";
 
 class Cart extends Component {
@@ -44,9 +44,11 @@ class Cart extends Component {
   };
 
   handleCheckout = async orderID => {
-    await this.props.orderCheckout(orderID, { status: 2 });
-    await this.props.createOrder();
-    await this.props.getUserOrders();
+    if (this.props.userOrderStatusCart.order_products_count > 0) {
+      await this.props.orderCheckout(orderID, { status: 2 });
+      await this.props.createOrder();
+      await this.props.getUserOrders();
+    }
   };
 
   render() {
