@@ -18,7 +18,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="col-9">
+        <div className="col-7">
           <Link to="/products" className="navbar-brand">
             <img
               src={require("../../assets/images/cafe.png")}
@@ -28,21 +28,23 @@ class Navbar extends Component {
             <span> Hug In Mug</span>
           </Link>
         </div>
+        <div className="col-2 text-right">
+          {this.props.user && (
+            <Link to="/cart">
+              <FontAwesomeIcon
+                icon={faShoppingBasket}
+                style={{
+                  color: "#fe687b",
+                  fontSize: 30
+                }}
+              />{" "}
+            </Link>
+          )}
+        </div>
 
         <div className="col-4 align-right">
           {this.props.user ? (
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
-              {this.props.user && (
-                <Link to="/cart">
-                  <FontAwesomeIcon
-                    icon={faShoppingBasket}
-                    style={{
-                      color: "#fe687b",
-                      fontSize: 25
-                    }}
-                  />{" "}
-                </Link>
-              )}
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <a
