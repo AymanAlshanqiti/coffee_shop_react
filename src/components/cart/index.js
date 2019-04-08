@@ -14,17 +14,6 @@ import {
 import Loading from "../Loading";
 
 class Cart extends Component {
-  // componentDidMount = async () => {
-  //   console.log("Cart.js", this.props.userOrderStatusCart);
-  //   if (this.props.userOrderStatusCart) {
-  //     await this.setState({
-  //       userOrderStatusCart: this.props.userOrderStatusCart
-  //     });
-  //     await this.props.getUserCart(this.props.userOrderStatusCart.id);
-  //     await this.setState({ cartProducts: this.props.userCart });
-  //   }
-  // };
-
   componentDidMount = async () => {
     await this.props.checkForExpiredToken();
     if (this.props.user) {

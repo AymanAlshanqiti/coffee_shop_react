@@ -6,7 +6,6 @@ import * as actionCreators from "../../store/actions/index";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import RegistrationForm from "./RegistrationForm";
 
 const formatAMPM = date => {
   let hours = date.getHours();
@@ -98,6 +97,9 @@ class Profile extends Component {
                     profile.customer.last_name
                   }`}
               </p>
+              <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
+                {profile && `${profile.customer.email}`}
+              </p>
               <div className="row justify-content-md-center my-5">
                 <br />
               </div>
@@ -117,10 +119,12 @@ class Profile extends Component {
                 return (
                   <li
                     key={ord.id}
-                    className="list-group-item d-flex justify-content-between align-items-center"
+                    className="list-group-item d-flex justify-content-between align-items-center text-left"
                   >
-                    {ord.id} || Total Price: {ord.total_price} || Created:{" "}
-                    {formatTimeS(ord.created_at)}
+                    {" "}
+                    <span>{ord.id}</span>
+                    <span>{ord.total_price}</span>
+                    <span>{formatTimeS(ord.created_at)}</span>
                     <span
                       className="badge badge-primary badge-pill"
                       style={{ backgroundColor: "#fe687b" }}
