@@ -116,8 +116,8 @@ class PreviousOrders extends Component {
               style={{ height: 500 }}
             >
               <img
-                src={require("../../assets/images/cafe.png")}
-                className="card-img-top my-2"
+                src={profile && this.props.profile.image}
+                className="card-img-top mt-4"
                 alt="user_pic"
                 style={{ width: 200, height: 200 }}
               />
