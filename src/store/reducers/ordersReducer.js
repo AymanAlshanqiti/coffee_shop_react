@@ -2,7 +2,10 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   userCart: null,
-  userCartLoading: true
+  userCartLoading: true,
+
+  orderDetail: null,
+  orderDetailLoading: true
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -12,6 +15,13 @@ const ordersReducer = (state = initialState, action) => {
         ...state,
         userCart: action.payload,
         userCartLoading: false
+      };
+
+    case actionTypes.GET_ORDER_DETAIL:
+      return {
+        ...state,
+        orderDetail: action.payload,
+        orderDetailLoading: false
       };
     default:
       return state;

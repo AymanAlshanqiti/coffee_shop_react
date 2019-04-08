@@ -58,7 +58,12 @@ class App extends Component {
         <div className="container-fluid my-4">
           <Switch>
             <Route exact path="/profile" component={Profile} />,
-            <Route exact path="/profile/orders" component={PreviousOrders} />,
+            <Route
+              exact
+              path="/orders/detail/:orderID"
+              component={PreviousOrders}
+            />
+            ,
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products" component={ProductList} />
             <Route path="/products/:productID" component={ProductDetail} />

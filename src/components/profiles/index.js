@@ -80,10 +80,10 @@ class Profile extends Component {
       console.log("TCL: Profile -> render -> customerOrders", customerOrders);
     }
 
-    let PreviousOrders = null;
+    let previousOrders = null;
     {
       if (profile) {
-        PreviousOrders = customerOrders.map(ord => {
+        previousOrders = customerOrders.map(ord => {
           return (
             <tr>
               <th scope="row">{ord.id}</th>
@@ -93,7 +93,7 @@ class Profile extends Component {
               <td className="text-center">{formatTimeS(ord.created_at)}</td>
               <td className="text-center">{ord.order_products.length}</td>
               <td className="text-center">
-                <Link to="/profile/orders">
+                <Link to={`/orders/detail/${ord.id}`}>
                   <button className="btn btn-light">Detail</button>
                 </Link>
               </td>
@@ -179,7 +179,7 @@ class Profile extends Component {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>{PreviousOrders}</tbody>
+                  <tbody>{previousOrders}</tbody>
                 </table>
               </div>
             </div>

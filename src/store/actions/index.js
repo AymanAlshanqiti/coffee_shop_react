@@ -20,4 +20,8 @@ export {
   setLoading
 } from "./productsActions";
 
-export { getUserCart, deleteCartProduct } from "./ordersActions";
+export {
+  getUserCart,
+  deleteCartProduct,
+  getOrderDetail
+} from "./ordersActions";

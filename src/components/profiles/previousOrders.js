@@ -7,7 +7,11 @@ import * as actionCreators from "../../store/actions/index";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronCircleDown,
+  faArrowCircleLeft
+} from "@fortawesome/free-solid-svg-icons";
+import Loading from "../Loading";
 
 const formatAMPM = date => {
   let hours = date.getHours();
@@ -51,17 +55,16 @@ const formatTimeS = ts => {
 class PreviousOrders extends Component {
   async componentDidMount() {
     let user = this.props.user;
-    console.log("TCL: Profile -> componentDidMount -> user", user);
     // TODO: check if needed even if the user
     // got to this page by <Link to='/profile'>
     this.props.getProfileDetail();
+    await this.props.getOrderDetail(this.props.match.params.orderID);
   }
 
   async componentDidUpdate(prevProps, prevState) {
     if (prevProps.user !== this.props.user || !this.props.profile) {
       this.props.getProfileDetail();
-
-      console.log("this.props.profile: ", this.props.profile);
+      await this.props.getOrderDetail(this.props.match.params.orderID);
     }
   }
 
@@ -70,110 +73,154 @@ class PreviousOrders extends Component {
 
     let customerOrders = null;
 
-    if (profile) {
-      customerOrders = profile.customer_orders.filter(
-        ord => ord.status.title !== "Cart"
+    if (this.props.orderDetailLoading) {
+      return <Loading />;
+    } else {
+      console.log(
+        "[PreviousOrders.js] => orderDetail => ",
+        this.props.orderDetail.order_products
       );
-      console.log("TCL: Profile -> render -> customerOrders", customerOrders);
-    }
-    return (
-      <div className="row my-4">
-        <div className="col-3 mx-4">
-          <div className="card my-4 align-items-center" style={{ height: 500 }}>
-            <img
-              src={require("../../assets/images/cafe.png")}
-              className="card-img-top my-2"
-              alt="user_pic"
-              style={{ width: 200, height: 200 }}
-            />
-            <div className="card-body text-center">
-              <h5 className="card-title">
-                @{profile && profile.customer.username}
-              </h5>
-              <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
-                {profile &&
-                  `${profile.customer.first_name} ${
-                    profile.customer.last_name
-                  }`}
-              </p>
-              <p className="card-text text-center" style={{ color: "#a2a2a2" }}>
-                {profile && `${profile.customer.email}`}
-              </p>
-              <div className="row justify-content-md-center my-5">
-                <br />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-8 mx-4 my-4 text-center">
-          <h2 style={{ color: "#fe687b" }}>
-            <FontAwesomeIcon
-              icon={faChevronCircleDown}
-              style={{ color: "#fe687b" }}
-            />{" "}
-            Order Detail
-          </h2>
-          <br />
 
-          <div className="row justify-content-md-center">
-            <div className="col-8">
-              <div className="col-12 mx-4 my-4 text-center">
-                {" "}
-                <table className="table table-hover text-left">
-                  <thead>
-                    <tr>
-                      <th scope="col" style={{ color: "#fe687b" }}>
-                        Order Id
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Total Price
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Created At
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Pruducts Count
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Operations
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>{PreviousOrders}</tbody>
-                </table>
+      if (profile) {
+        customerOrders = profile.customer_orders.filter(
+          ord => ord.status.title !== "Cart"
+        );
+        console.log("TCL: Profile -> render -> customerOrders", customerOrders);
+      }
+
+      let orderProducts = null;
+      {
+        if (profile) {
+          orderProducts = this.props.orderDetail.order_products.map(
+            productObj => {
+              return (
+                <tr>
+                  <th scope="row">{productObj.product.name}</th>
+                  <td className="text-center">
+                    <span>{productObj.quantity}</span>
+                  </td>
+                  <td className="text-center">
+                    <span>{productObj.total_price}</span>SR
+                  </td>
+                </tr>
+              );
+            }
+          );
+        }
+      }
+      return (
+        <div className="row my-4">
+          <div className="col-3 mx-4">
+            <div
+              className="card my-4 align-items-center"
+              style={{ height: 500 }}
+            >
+              <img
+                src={require("../../assets/images/cafe.png")}
+                className="card-img-top my-2"
+                alt="user_pic"
+                style={{ width: 200, height: 200 }}
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">
+                  @{profile && profile.customer.username}
+                </h5>
+                <p
+                  className="card-text text-center"
+                  style={{ color: "#a2a2a2" }}
+                >
+                  {profile &&
+                    `${profile.customer.first_name} ${
+                      profile.customer.last_name
+                    }`}
+                </p>
+                <p
+                  className="card-text text-center"
+                  style={{ color: "#a2a2a2" }}
+                >
+                  {profile && `${profile.customer.email}`}
+                </p>
+                <div className="row justify-content-md-center my-5">
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-8 mx-4 my-4 text-center">
+            <div className="row">
+              <div className="col-3 text-left">
+                <Link to="/profile">
+                  <h4 style={{ color: "#c7c7c7" }}>
+                    <FontAwesomeIcon
+                      icon={faArrowCircleLeft}
+                      style={{ color: "#c7c7c7" }}
+                    />{" "}
+                    Go Back
+                  </h4>
+                </Link>
+              </div>
+              <div className="col-6">
+                <h2 style={{ color: "#fe687b" }}>
+                  <FontAwesomeIcon
+                    icon={faChevronCircleDown}
+                    style={{ color: "#fe687b" }}
+                  />{" "}
+                  Order Detail
+                </h2>
+              </div>
+            </div>
+
+            <br />
+
+            <div className="row justify-content-md-center">
+              <div className="col-8">
+                <div className="col-12 mx-4 my-4 text-center">
+                  {" "}
+                  <table className="table table-hover text-left">
+                    <thead>
+                      <tr>
+                        <th scope="col" style={{ color: "#fe687b" }}>
+                          Product Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="text-center"
+                          style={{ color: "#fe687b" }}
+                        >
+                          Quantity
+                        </th>
+                        <th
+                          scope="col"
+                          className="text-center"
+                          style={{ color: "#fe687b" }}
+                        >
+                          Sub Price
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>{orderProducts}</tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProfileDetail: () => dispatch(actionCreators.fetchProfileDetail())
+    getProfileDetail: () => dispatch(actionCreators.fetchProfileDetail()),
+    getOrderDetail: orderID => dispatch(actionCreators.getOrderDetail(orderID))
   };
 };
 const mapStateToProps = state => ({
   user: state.profileReducer.user,
-  profile: state.profileReducer.profile
+  profile: state.profileReducer.profile,
+  orderDetail: state.ordersReducer.orderDetail,
+  orderDetailLoading: state.ordersReducer.orderDetailLoading
 });
 export default connect(
   mapStateToProps,
