@@ -15,7 +15,7 @@ import ProductList from "./Components/ProductList";
 import ProductDetail from "./Components/ProductDetail";
 import Navbar from "./Components/Navbar";
 import Profile from "./Components/Profiles";
-import PreviousOrders from "./Components/Profiles/PreviousOrders";
+import PreviousOrders from "./Components/Profiles/previousOrders";
 
 import RegistrationForm from "./Components/Profiles/RegistrationForm";
 import Cart from "./Components/Cart";
@@ -102,9 +102,6 @@ const mapDispatchToProps = dispatch => {
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     createOrder: order => dispatch(actionCreators.createOrder(order)),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order))
-    // getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
-    // deleteCartProduct: orderProductID =>
-    //   dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 
