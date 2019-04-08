@@ -48,7 +48,7 @@ const formatTimeS = ts => {
   return datestr + " | " + time;
 };
 
-class Profile extends Component {
+class PreviousOrders extends Component {
   async componentDidMount() {
     let user = this.props.user;
     console.log("TCL: Profile -> componentDidMount -> user", user);
@@ -78,26 +78,6 @@ class Profile extends Component {
         ord => ord.status.title !== "Cart"
       );
       console.log("TCL: Profile -> render -> customerOrders", customerOrders);
-    }
-
-    let PreviousOrders = null;
-    {
-      if (profile) {
-        PreviousOrders = customerOrders.map(ord => {
-          return (
-            <tr>
-              <Link to="/profile/orders">
-                <th scope="row">{ord.id}</th>
-              </Link>
-              <td className="text-center">
-                <span>{ord.total_price}</span> SR
-              </td>
-              <td className="text-center">{formatTimeS(ord.created_at)}</td>
-              <td className="text-center">{ord.order_products.length}</td>
-            </tr>
-          );
-        });
-      }
     }
     return (
       <div className="row my-4">
@@ -135,45 +115,25 @@ class Profile extends Component {
             Previous orders
           </h2>
           <br />
-
-          <div className="row justify-content-md-center">
-            <div className="col-8">
-              <div className="col-12 mx-4 my-4 text-center">
-                {" "}
-                <table className="table table-hover text-left">
-                  <thead>
-                    <tr>
-                      <th scope="col" style={{ color: "#fe687b" }}>
-                        Order Id
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Total Price
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Created At
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-center"
-                        style={{ color: "#fe687b" }}
-                      >
-                        Pruducts Count
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>{PreviousOrders}</tbody>
-                </table>
-              </div>
-            </div>
+          <div className="row">
+            <div className="col-4 text-left">Product Name</div>
+            <div className="col-4 text-left">Quantity</div>
+            <div className="col-4">Sub Total</div>
           </div>
+
+          <ul className="list-group">
+            {profile &&
+              customerOrders.map(ord => {
+                return (
+                  <li className="list-group-item d-flex justify-content-between align-items-center text-left">
+                    {" "}
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
       </div>
     );
@@ -192,4 +152,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profile);
+)(PreviousOrders);

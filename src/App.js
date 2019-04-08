@@ -15,6 +15,8 @@ import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
+import PreviousOrders from "../src/components/profiles/previousOrders";
+
 import RegistrationForm from "./components/profiles/RegistrationForm";
 import Cart from "../src/components/cart";
 import LoginForm from "./components/profiles/LoginForm";
@@ -56,6 +58,7 @@ class App extends Component {
         <div className="container-fluid my-4">
           <Switch>
             <Route exact path="/profile" component={Profile} />,
+            <Route exact path="/profile/orders" component={PreviousOrders} />,
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products" component={ProductList} />
             <Route path="/products/:productID" component={ProductDetail} />
