@@ -15,6 +15,8 @@ import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import Navbar from "../src/components/navbar";
 import Profile from "../src/components/profiles";
+import PreviousOrders from "../src/components/profiles/previousOrders";
+
 import RegistrationForm from "./components/profiles/RegistrationForm";
 import Cart from "../src/components/cart";
 import LoginForm from "./components/profiles/LoginForm";
@@ -28,6 +30,11 @@ class App extends Component {
   componentDidMount = async () => {
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
+
+    if (this.props.user) {
+      await this.props.getUserOrders();
+      this.getCartStatusOrder();
+    }
   };
 
   getCartStatusOrder = () => {
@@ -50,19 +57,13 @@ class App extends Component {
         </div>
         <div className="container-fluid my-4">
           <Switch>
-
-            {/* {this.props.user &&
-              ( */}
-            <Route exact path="/Profile" component={Profile} />,
+            <Route exact path="/profile" component={Profile} />,
+            <Route exact path="/profile/orders" component={PreviousOrders} />,
             <Route exact path="/cart" component={Cart} />
-            {/* )} */}
-      
             <Route exact path="/products" component={ProductList} />
             <Route path="/products/:productID" component={ProductDetail} />
-
             <Route exact path="/signup" component={RegistrationForm} />
             <Route exact path="/login" component={LoginForm} />
-
             <Redirect to="/products" />
           </Switch>
         </div>
@@ -75,10 +76,10 @@ const mapStateToProps = state => {
   return {
     user: state.profileReducer.user,
     userLoading: state.profileReducer.userLoading,
-    
+
     userOrders: state.profileReducer.userOrders,
     userOrdersLoading: state.profileReducer.userOrdersLoading,
-    
+
     userOrderStatusCart: state.profileReducer.userOrderStatusCart,
     userOrderStatusCartLoading: state.profileReducer.userOrderStatusCartLoading
   };

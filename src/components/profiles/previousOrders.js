@@ -7,7 +7,7 @@ import * as actionCreators from "../../store/actions/index";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 
 const formatAMPM = date => {
   let hours = date.getHours();
@@ -48,7 +48,7 @@ const formatTimeS = ts => {
   return datestr + " | " + time;
 };
 
-class Profile extends Component {
+class PreviousOrders extends Component {
   async componentDidMount() {
     let user = this.props.user;
     console.log("TCL: Profile -> componentDidMount -> user", user);
@@ -58,9 +58,6 @@ class Profile extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log("TCL: Profile -> componentDidUpdate -> prevProps", prevProps);
-    console.log("TCL: Profile -> componentDidUpdate -> prevProps", this.props);
-
     if (prevProps.user !== this.props.user || !this.props.profile) {
       this.props.getProfileDetail();
 
@@ -78,29 +75,6 @@ class Profile extends Component {
         ord => ord.status.title !== "Cart"
       );
       console.log("TCL: Profile -> render -> customerOrders", customerOrders);
-    }
-
-    let PreviousOrders = null;
-    {
-      if (profile) {
-        PreviousOrders = customerOrders.map(ord => {
-          return (
-            <tr>
-              <th scope="row">{ord.id}</th>
-              <td className="text-center">
-                <span>{ord.total_price}</span> SR
-              </td>
-              <td className="text-center">{formatTimeS(ord.created_at)}</td>
-              <td className="text-center">{ord.order_products.length}</td>
-              <td className="text-center">
-                <Link to="/profile/orders">
-                  <button className="btn btn-light">Detail</button>
-                </Link>
-              </td>
-            </tr>
-          );
-        });
-      }
     }
     return (
       <div className="row my-4">
@@ -131,11 +105,13 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-
         <div className="col-8 mx-4 my-4 text-center">
           <h2 style={{ color: "#fe687b" }}>
-            <FontAwesomeIcon icon={faCoffee} style={{ color: "#fe687b" }} /> My
-            Previous orders
+            <FontAwesomeIcon
+              icon={faChevronCircleDown}
+              style={{ color: "#fe687b" }}
+            />{" "}
+            Order Detail
           </h2>
           <br />
 
@@ -202,4 +178,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profile);
+)(PreviousOrders);

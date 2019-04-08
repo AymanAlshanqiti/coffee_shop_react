@@ -17,6 +17,10 @@ class ProductDetail extends Component {
 
   componentDidMount = async () => {
     await this.props.getProduct(this.props.match.params.productID);
+    await this.setState({
+      order: this.props.userOrderStatusCart.id,
+      product: this.props.productInfo.id
+    });
   };
 
   quantityChange(e) {
@@ -31,7 +35,7 @@ class ProductDetail extends Component {
     };
     console.log("[Product detail state]  =>", this.state);
 
-    if (loading) {
+    if (this.props.loading || this.props.userOrderStatusCartLoading) {
       return <Loading />;
     } else {
       return (
