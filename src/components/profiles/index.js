@@ -54,7 +54,8 @@ class Profile extends Component {
     console.log("TCL: Profile -> componentDidMount -> user", user);
     // TODO: check if needed even if the user
     // got to this page by <Link to='/profile'>
-    this.props.getProfileDetail();
+    await this.props.getUserOrders();
+    await this.props.getProfileDetail();
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -62,7 +63,7 @@ class Profile extends Component {
     console.log("TCL: Profile -> componentDidUpdate -> prevProps", this.props);
 
     if (prevProps.user !== this.props.user || !this.props.profile) {
-      this.props.getProfileDetail();
+      await this.props.getProfileDetail();
 
       console.log("this.props.profile: ", this.props.profile);
     }
@@ -192,6 +193,7 @@ class Profile extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     getProfileDetail: () => dispatch(actionCreators.fetchProfileDetail())
   };
 };

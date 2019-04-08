@@ -140,10 +140,10 @@ export const getUserCartOrder = order => {
   };
 };
 
-export const createOrder = order => {
+export const createOrder = () => {
   return async dispatch => {
     try {
-      const res = await instance.post("orders/create/", order);
+      const res = await instance.post("orders/create/");
       const newOrder = res.data;
       dispatch({
         type: actionTypes.CREATE_ORDER,

@@ -23,7 +23,7 @@ import LoginForm from "./components/profiles/LoginForm";
 
 class App extends Component {
   state = {
-    state: 1,
+    status: 1,
     total_price: 0
   };
 
