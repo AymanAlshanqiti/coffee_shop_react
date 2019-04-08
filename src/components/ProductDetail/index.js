@@ -15,10 +15,12 @@ class ProductDetail extends Component {
 
   componentDidMount = async () => {
     await this.props.getProduct(this.props.match.params.productID);
-    await this.setState({
-      order: this.props.userOrderStatusCart.id,
-      product: this.props.productInfo.id
-    });
+    if (this.props.userOrderStatusCart) {
+      await this.setState({
+        order: this.props.userOrderStatusCart.id,
+        product: this.props.productInfo.id
+      });
+    }
   };
 
   quantityChange(e) {
@@ -26,12 +28,11 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { loading, productInfo } = this.props;
+    const { productInfo } = this.props;
 
     const addProduct = async () => {
       await this.props.addProductToCart(this.state);
     };
-    console.log("[Product detail state]  =>", this.state);
 
     if (this.props.loading || this.props.userOrderStatusCartLoading) {
       return <Loading />;
@@ -41,13 +42,12 @@ class ProductDetail extends Component {
           <div className="col-3 mx-4">
             <div
               className="card my-4 align-items-center"
-              style={{ height: 500 }}
+              style={{ height: "100%" }}
             >
               <img
                 src={productInfo.image}
-                className="card-img-top my-2"
+                className="card-img-top"
                 alt={productInfo.name}
-                style={{ width: 200, height: 200 }}
               />
               <div className="card-body text-center">
                 <h5 className="card-title">{productInfo.name}</h5>
@@ -96,7 +96,10 @@ class ProductDetail extends Component {
             </div>
           </div>
           <div className="col-8 mx-4">
-            <div className="card my-4 align-items-left" style={{ height: 500 }}>
+            <div
+              className="card my-4 align-items-left"
+              style={{ height: "100%" }}
+            >
               <div className="card-body text-center">
                 <h5 className="card-title my-5">{productInfo.description}</h5>
                 <div className="row ">
