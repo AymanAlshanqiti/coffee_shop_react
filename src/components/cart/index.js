@@ -42,6 +42,11 @@ class Cart extends Component {
     await this.props.getUserCart(this.props.userOrderStatusCart.id);
   };
 
+  handleCheckout = async orderID => {
+    await this.props.orderCheckout(orderID, { status: 2 });
+    await this.props.getUserCart(this.props.userOrderStatusCart.id);
+  };
+
   render() {
     if (
       this.props.userLoading ||
@@ -133,6 +138,9 @@ class Cart extends Component {
                       <button
                         className="btn btn-danger"
                         style={{ color: "#FFF", backgroundColor: "#fe687b" }}
+                        onClick={() =>
+                          this.handleCheckout(this.props.userCart.id)
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faMoneyBill}
@@ -176,7 +184,9 @@ const mapDispatchToProps = dispatch => {
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
     getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
     deleteCartProduct: orderProductID =>
-      dispatch(actionCreators.deleteCartProduct(orderProductID))
+      dispatch(actionCreators.deleteCartProduct(orderProductID)),
+    orderCheckout: (orderID, orderStatus) =>
+      dispatch(actionCreators.orderCheckout(orderID, orderStatus))
   };
 };
 

@@ -44,3 +44,17 @@ export const getOrderDetail = orderID => {
     }
   };
 };
+
+export const orderCheckout = (orderID, orderStatus) => {
+  console.log("[hi from orderCheckout] => ", orderID, orderStatus);
+  return async dispatch => {
+    try {
+      await instance.put(`/orders/update/${orderID}`, orderStatus);
+      dispatch({
+        type: actionTypes.ORDER_CHECKOUT
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};

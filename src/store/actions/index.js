@@ -10,7 +10,6 @@ export {
   getUserCartOrder,
   createOrder,
   addProductToCart,
-  orderCheckout,
   fetchProfileDetail
 } from "./profileActions";
 
@@ -23,5 +22,6 @@ export {
 export {
   getUserCart,
   deleteCartProduct,
-  getOrderDetail
+  getOrderDetail,
+  orderCheckout
 } from "./ordersActions";
