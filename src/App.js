@@ -30,6 +30,7 @@ class App extends Component {
   componentDidMount = async () => {
     await this.props.getAllProducts();
     await this.props.checkForExpiredToken();
+    await this.props.getProfileDetail();
 
     if (this.props.user) {
       await this.props.getUserOrders();
@@ -57,14 +58,21 @@ class App extends Component {
         </div>
         <div className="container-fluid my-4">
           <Switch>
-            <Route exact path="/profile" component={Profile} />,
-            <Route
-              exact
-              path="/orders/detail/:orderID"
-              component={PreviousOrders}
-            />
-            ,
-            <Route exact path="/cart" component={Cart} />
+            {this.props.profile && (
+              <Route exact path="/profile" component={Profile} />
+            )}
+
+            {this.props.profile && (
+              <Route
+                exact
+                path="/orders/detail/:orderID"
+                component={PreviousOrders}
+              />
+            )}
+            {this.props.profile && (
+              <Route exact path="/cart" component={Cart} />
+            )}
+
             <Route exact path="/products" component={ProductList} />
             <Route path="/products/:productID" component={ProductDetail} />
             <Route exact path="/signup" component={RegistrationForm} />
@@ -81,6 +89,7 @@ const mapStateToProps = state => {
   return {
     user: state.profileReducer.user,
     userLoading: state.profileReducer.userLoading,
+    profile: state.profileReducer.profile,
 
     userOrders: state.profileReducer.userOrders,
     userOrdersLoading: state.profileReducer.userOrdersLoading,
@@ -94,6 +103,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllProducts: () => dispatch(actionCreators.getAllProducts()),
     checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
+    getProfileDetail: () => dispatch(actionCreators.fetchProfileDetail()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     createOrder: order => dispatch(actionCreators.createOrder(order)),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
