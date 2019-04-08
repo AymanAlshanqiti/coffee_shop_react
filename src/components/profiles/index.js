@@ -86,14 +86,17 @@ class Profile extends Component {
         PreviousOrders = customerOrders.map(ord => {
           return (
             <tr>
-              <Link to="/profile/orders">
-                <th scope="row">{ord.id}</th>
-              </Link>
+              <th scope="row">{ord.id}</th>
               <td className="text-center">
                 <span>{ord.total_price}</span> SR
               </td>
               <td className="text-center">{formatTimeS(ord.created_at)}</td>
               <td className="text-center">{ord.order_products.length}</td>
+              <td className="text-center">
+                <Link to="/profile/orders">
+                  <button className="btn btn-light">Detail</button>
+                </Link>
+              </td>
             </tr>
           );
         });
@@ -166,6 +169,13 @@ class Profile extends Component {
                         style={{ color: "#fe687b" }}
                       >
                         Pruducts Count
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-center"
+                        style={{ color: "#fe687b" }}
+                      >
+                        Operations
                       </th>
                     </tr>
                   </thead>
