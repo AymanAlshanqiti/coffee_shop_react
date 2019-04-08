@@ -17,6 +17,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        {/*################ Brand Name & Icon ################*/}
         <div className="col-7">
           <Link to="/products" className="navbar-brand">
             <img
@@ -27,20 +28,39 @@ class Navbar extends Component {
             <span> Hug In Mug</span>
           </Link>
         </div>
+
+        {/*################ Cart Icon ################*/}
         <div className="col-2 text-right">
           {this.props.user && (
             <Link to="/cart">
+              <span
+                class="badge badge-pill badge-danger"
+                style={{
+                  position: "relative",
+                  top: -5,
+                  right: 2,
+                  paddingRight: 10,
+                  paddingLeft: 10,
+                  backgroundColor: "#fe687b"
+                }}
+              >
+                {/*################ Set Cart Badge To Show Cart's Product Count ################*/}{" "}
+                {this.props.userOrderStatusCart
+                  ? this.props.userOrderStatusCart.order_products_count
+                  : "0"}
+              </span>{" "}
               <FontAwesomeIcon
                 icon={faShoppingBasket}
                 style={{
                   color: "#fe687b",
-                  fontSize: 30
+                  fontSize: 35
                 }}
               />{" "}
             </Link>
           )}
         </div>
 
+        {/*################ Dropdown Menu ################*/}
         <div className="col-4 align-right">
           {this.props.user ? (
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
@@ -97,6 +117,7 @@ class Navbar extends Component {
               </ul>
             </div>
           ) : (
+            /*################ Login & Signup Button ################*/
             <div>
               <Link to="/signup" className="btn btn-outline-secondary mx-3">
                 <FontAwesomeIcon icon={faUserPlus} /> Signup
@@ -113,7 +134,8 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.profileReducer.user
+  user: state.profileReducer.user,
+  userOrderStatusCart: state.profileReducer.userOrderStatusCart
 });
 
 const mapDispatchToProps = dispatch => ({
