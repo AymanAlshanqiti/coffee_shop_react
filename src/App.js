@@ -101,10 +101,10 @@ const mapDispatchToProps = dispatch => {
     checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
     createOrder: order => dispatch(actionCreators.createOrder(order)),
-    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
-    getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
-    deleteCartProduct: orderProductID =>
-      dispatch(actionCreators.deleteCartProduct(orderProductID))
+    getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order))
+    // getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
+    // deleteCartProduct: orderProductID =>
+    //   dispatch(actionCreators.deleteCartProduct(orderProductID))
   };
 };
 

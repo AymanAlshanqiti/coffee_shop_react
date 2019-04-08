@@ -7,19 +7,19 @@ import ProductsCards from "./ProductCard";
 
 class ProductList extends Component {
   render() {
-    const { products, loading } = this.props;
+    const { products, productsLoading } = this.props;
 
-    const prodList = products.map(product => (
+    const productsList = products.map(product => (
       <ProductsCards product={product} key={product.id} />
     ));
 
-    if (loading) {
+    if (productsLoading) {
       return <Loading />;
     } else {
       return (
         <div className="row justify-content-md-center">
           <div className="col-10">
-            <div className="row">{prodList}</div>
+            <div className="row">{productsList}</div>
           </div>
         </div>
       );
@@ -29,9 +29,8 @@ class ProductList extends Component {
 
 const mapStateToProps = state => {
   return {
-    // user: state.profileReducer.user,
-    loading: state.productsReducer.productsLoading,
-    products: state.productsReducer.products
+    products: state.productsReducer.products,
+    productsLoading: state.productsReducer.productsLoading
   };
 };
 

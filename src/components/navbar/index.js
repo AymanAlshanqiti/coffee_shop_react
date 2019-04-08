@@ -61,7 +61,7 @@ class Navbar extends Component {
         </div>
 
         {/*################ Dropdown Menu ################*/}
-        <div className="col-4 align-right">
+        <div className="col-3 align-right">
           {this.props.user ? (
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
