@@ -140,10 +140,10 @@ export const getUserCartOrder = order => {
   };
 };
 
-export const createOrder = order => {
+export const createOrder = () => {
   return async dispatch => {
     try {
-      const res = await instance.post("orders/create/", order);
+      const res = await instance.post("orders/create/");
       const newOrder = res.data;
       dispatch({
         type: actionTypes.CREATE_ORDER,
@@ -165,17 +165,6 @@ export const addProductToCart = product => {
         type: actionTypes.ADD_PRODUCT_TO_CART,
         payload: newProduct
       });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-
-export const orderCheckout = orderID => {
-  return async dispatch => {
-    try {
-      await instance.post("orders/update/", orderID);
-      getUserOrders();
     } catch (error) {
       console.error(error);
     }

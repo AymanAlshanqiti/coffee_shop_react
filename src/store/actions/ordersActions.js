@@ -29,3 +29,32 @@ export const deleteCartProduct = orderProductID => {
     }
   };
 };
+
+export const getOrderDetail = orderID => {
+  return async dispatch => {
+    try {
+      const res = await instance.get(`/orders/detail/${orderID}/`);
+      const orderObj = res.data;
+      dispatch({
+        type: actionTypes.GET_ORDER_DETAIL,
+        payload: orderObj
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const orderCheckout = (orderID, orderStatus) => {
+  console.log("[hi from orderCheckout] => ", orderID, orderStatus);
+  return async dispatch => {
+    try {
+      await instance.put(`/orders/update/${orderID}`, orderStatus);
+      dispatch({
+        type: actionTypes.ORDER_CHECKOUT
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};

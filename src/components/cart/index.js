@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 // Actions
 import * as actionCreators from "../../store/actions";
@@ -40,6 +41,12 @@ class Cart extends Component {
   handleDeleteProduct = async orderProductID => {
     await this.props.deleteCartProduct(orderProductID);
     await this.props.getUserCart(this.props.userOrderStatusCart.id);
+  };
+
+  handleCheckout = async orderID => {
+    await this.props.orderCheckout(orderID, { status: 2 });
+    await this.props.createOrder();
+    await this.props.getUserOrders();
   };
 
   render() {
@@ -130,16 +137,21 @@ class Cart extends Component {
                     </th>
 
                     <td className="text-center">
-                      <button
-                        className="btn btn-danger"
-                        style={{ color: "#FFF", backgroundColor: "#fe687b" }}
-                      >
-                        <FontAwesomeIcon
-                          icon={faMoneyBill}
-                          style={{ color: "#FFF" }}
-                        />{" "}
-                        Checkout
-                      </button>
+                      <Link to="/profile">
+                        <button
+                          className="btn btn-danger"
+                          style={{ color: "#FFF", backgroundColor: "#fe687b" }}
+                          onClick={() =>
+                            this.handleCheckout(this.props.userCart.id)
+                          }
+                        >
+                          <FontAwesomeIcon
+                            icon={faMoneyBill}
+                            style={{ color: "#FFF" }}
+                          />{" "}
+                          Checkout
+                        </button>
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
@@ -172,11 +184,13 @@ const mapDispatchToProps = dispatch => {
   return {
     checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
     getUserOrders: () => dispatch(actionCreators.getUserOrders()),
-    createOrder: order => dispatch(actionCreators.createOrder(order)),
+    createOrder: () => dispatch(actionCreators.createOrder()),
     getUserCartOrder: order => dispatch(actionCreators.getUserCartOrder(order)),
     getUserCart: orderID => dispatch(actionCreators.getUserCart(orderID)),
     deleteCartProduct: orderProductID =>
-      dispatch(actionCreators.deleteCartProduct(orderProductID))
+      dispatch(actionCreators.deleteCartProduct(orderProductID)),
+    orderCheckout: (orderID, orderStatus) =>
+      dispatch(actionCreators.orderCheckout(orderID, orderStatus))
   };
 };
 
