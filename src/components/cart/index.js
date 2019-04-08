@@ -44,9 +44,15 @@ class Cart extends Component {
   };
 
   handleCheckout = async orderID => {
-    await this.props.orderCheckout(orderID, { status: 2 });
-    await this.props.createOrder();
-    await this.props.getUserOrders();
+    console.log(
+      "TCL: ProductDetail -> addProduct -> addProduct => nooooooooooooo",
+      this.props.userOrderStatusCart.order_products_count
+    );
+    if (this.props.userOrderStatusCart.order_products_count > 0) {
+      await this.props.orderCheckout(orderID, { status: 2 });
+      await this.props.createOrder();
+      await this.props.getUserOrders();
+    }
   };
 
   render() {
