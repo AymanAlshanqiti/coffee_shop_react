@@ -6,7 +6,7 @@ class ProductsCards extends Component {
     const product = this.props.product;
     return (
       <div className="col-3 ">
-        <div className="card my-4 align-items-center">
+        <div className="card my-4 ">
           <img
             src={product.image}
             className="card-img-top"

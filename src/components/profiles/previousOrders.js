@@ -13,50 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../Loading";
 
-const formatAMPM = date => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let ampm = hours >= 12 ? "pm" : "am";
-
-  hours = hours % 12 || 12; // the hour '0' should be '12'
-
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-
-  return hours + ":" + minutes + " " + ampm;
-};
-
-const formatTimeS = ts => {
-  let date = new Date(ts);
-  let monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-
-  let day = date.getDate();
-  let monthIndex = date.getMonth();
-  let year = date.getFullYear();
-  // Where do we use it ? hey ayman!! we use it here!
-  let datestr = day + " " + monthNames[monthIndex] + " " + year;
-  let time = formatAMPM(date);
-
-  return datestr + " | " + time;
-};
-
 class PreviousOrders extends Component {
   async componentDidMount() {
-    let user = this.props.user;
-    // TODO: check if needed even if the user
-    // got to this page by <Link to='/profile'>
     this.props.getProfileDetail();
     await this.props.getOrderDetail(this.props.match.params.orderID);
   }
@@ -100,7 +58,7 @@ class PreviousOrders extends Component {
                     <span>{productObj.quantity}</span>
                   </td>
                   <td className="text-center">
-                    <span>{productObj.total_price}</span>SR
+                    <span>{productObj.total_price}</span> SR
                   </td>
                 </tr>
               );
@@ -112,11 +70,19 @@ class PreviousOrders extends Component {
         <div className="row">
           <div className="col-3">
             <div className="card align-items-center" style={{ height: "100%" }}>
-              <img
-                src={profile && this.props.profile.image}
-                className="card-img-top"
-                alt="user_pic"
-              />
+              {profile && !this.props.profile.image ? (
+                <img
+                  src={require("../../assets/images/cafe.png")}
+                  className="card-img-top "
+                  alt="user_pic"
+                />
+              ) : (
+                <img
+                  src={profile && this.props.profile.image}
+                  className="card-img-top "
+                  alt="user_pic"
+                />
+              )}
               <div className="card-body text-center">
                 <h5 className="card-title">
                   @{profile && profile.customer.username}

@@ -41,7 +41,6 @@ const formatTimeS = ts => {
   let day = date.getDate();
   let monthIndex = date.getMonth();
   let year = date.getFullYear();
-  // Where do we use it ? hey ayman!! we use it here!
   let datestr = day + " " + monthNames[monthIndex] + " " + year;
   let time = formatAMPM(date);
 
@@ -50,10 +49,6 @@ const formatTimeS = ts => {
 
 class Profile extends Component {
   async componentDidMount() {
-    let user = this.props.user;
-    console.log("TCL: Profile -> componentDidMount -> user", user);
-    // TODO: check if needed even if the user
-    // got to this page by <Link to='/profile'>
     await this.props.getUserOrders();
     await this.props.getProfileDetail();
   }
@@ -107,11 +102,19 @@ class Profile extends Component {
       <div className="row">
         <div className="col-3 ">
           <div className="card align-items-center" style={{ height: "100%" }}>
-            <img
-              src={profile && this.props.profile.image}
-              className="card-img-top "
-              alt="user_pic"
-            />
+            {profile && !this.props.profile.image ? (
+              <img
+                src={require("../../assets/images/cafe.png")}
+                className="card-img-top "
+                alt="user_pic"
+              />
+            ) : (
+              <img
+                src={profile && this.props.profile.image}
+                className="card-img-top "
+                alt="user_pic"
+              />
+            )}
             <div className="card-body text-center">
               <h5 className="card-title">
                 @{profile && profile.customer.username}

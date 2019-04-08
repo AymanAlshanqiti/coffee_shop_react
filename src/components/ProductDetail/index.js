@@ -34,7 +34,7 @@ class ProductDetail extends Component {
       await this.props.addProductToCart(this.state);
     };
 
-    if (this.props.loading || this.props.userOrderStatusCartLoading) {
+    if (this.props.loading) {
       return <Loading />;
     } else {
       return (
