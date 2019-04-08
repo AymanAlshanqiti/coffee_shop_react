@@ -28,6 +28,7 @@ const profileReducer = (state = initialState, action) => {
         userLoading: false
       };
     case actionTypes.FETCH_PROFILE_DETAIL:
+      console.log("[FETCH_PROFILE_DETAIL] => ", action.payload);
       return {
         ...state,
         profile: action.payload

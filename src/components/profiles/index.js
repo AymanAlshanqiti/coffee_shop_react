@@ -108,7 +108,7 @@ class Profile extends Component {
         <div className="col-3 mx-4">
           <div className="card my-4 align-items-center" style={{ height: 500 }}>
             <img
-              src={require("../../assets/images/cafe.png")}
+              src={profile && this.props.profile.image}
               className="card-img-top my-2"
               alt="user_pic"
               style={{ width: 200, height: 200 }}
