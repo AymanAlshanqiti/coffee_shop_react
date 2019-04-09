@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import ProductList from "./Components/ProductList";
 import ProductDetail from "./Components/ProductDetail";
 import Navbar from "./Components/Navbar";
+
 import Profile from "./Components/Profile";
 import PreviousOrders from "./Components/Profile/PreviousOrders";
 
