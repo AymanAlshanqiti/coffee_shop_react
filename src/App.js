@@ -14,12 +14,12 @@ import { connect } from "react-redux";
 import ProductList from "./Components/ProductList";
 import ProductDetail from "./Components/ProductDetail";
 import Navbar from "./Components/Navbar";
-import Profile from "./Components/Profiles";
-import PreviousOrders from "./Components/Profiles/previousOrders";
+import Profile from "./Components/Profile";
+import PreviousOrders from "./Components/Profile/PreviousOrders";
 
-import RegistrationForm from "./Components/Profiles/RegistrationForm";
+import RegistrationForm from "./Components/Profile/RegistrationForm";
 import Cart from "./Components/Cart";
-import LoginForm from "./Components/Profiles/LoginForm";
+import LoginForm from "./Components/Profile/LoginForm";
 
 class App extends Component {
   state = {
