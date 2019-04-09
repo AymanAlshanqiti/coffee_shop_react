@@ -15,7 +15,7 @@ import ProductList from "./Components/ProductList";
 import ProductDetail from "./Components/ProductDetail";
 import Navbar from "./Components/Navbar";
 import Profile from "./Components/Profiles";
-import PreviousOrders from "./Components/Profiles/previousOrders";
+import PreviousOrders from "./Components/Profiles/PreviousOrders";
 
 import RegistrationForm from "./Components/Profiles/RegistrationForm";
 import Cart from "./Components/Cart";
