@@ -18,7 +18,7 @@ class ProductList extends Component {
     } else {
       return (
         <div className="row justify-content-md-center">
-          <div className="col-10">
+          <div className="col-11">
             <div className="row">{productsList}</div>
           </div>
         </div>
