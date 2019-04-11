@@ -19,7 +19,11 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         {/*################ Brand Name & Icon ################*/}
         <div className="col-7">
-          <Link to="/products" className="navbar-brand">
+          <Link
+            to="/products"
+            className="navbar-brand"
+            style={{ textDecoration: "none" }}
+          >
             <img
               src={require("../../assets/images/cafe.png")}
               style={{ width: 50 }}
@@ -32,7 +36,7 @@ class Navbar extends Component {
         {/*################ Cart Icon ################*/}
         <div className="col-2 text-right">
           {this.props.user && (
-            <Link to="/cart">
+            <Link to="/cart" style={{ textDecoration: "none" }}>
               <span
                 class="badge badge-pill badge-danger"
                 style={{
@@ -41,7 +45,8 @@ class Navbar extends Component {
                   right: 2,
                   paddingRight: 10,
                   paddingLeft: 10,
-                  backgroundColor: "#fe687b"
+                  backgroundColor: "#fe687b",
+                  textDecoration: "none"
                 }}
               >
                 {/*################ Set Cart Badge To Show Cart's Product Count ################*/}{" "}
@@ -53,7 +58,8 @@ class Navbar extends Component {
                 icon={faShoppingBasket}
                 style={{
                   color: "#fe687b",
-                  fontSize: 35
+                  fontSize: 35,
+                  textDecoration: "none"
                 }}
               />{" "}
             </Link>
